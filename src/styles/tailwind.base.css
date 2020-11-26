@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-4xl pb-2 font-medium m-0 mb-2;
+    }
+}
+
+@layer components {
+    .link {
+        @apply text-primary no-underline hover:underline;
+    }
+}
