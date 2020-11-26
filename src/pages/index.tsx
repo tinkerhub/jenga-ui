@@ -7,7 +7,7 @@ const Home = (): JSX.Element => {
                 <title>Create Next App</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>hello world</div>
+            <div className="text-blue-400 text-4xl text-center">Hello World</div>
         </div>
     );
 };
