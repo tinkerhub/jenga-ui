@@ -13,6 +13,9 @@ module.exports = {
                 background: {
                     DEFAULT: '#C1EDD9',
                 },
+                subtext: {
+                    DEFAULT: '#696969',
+                },
             },
         },
     },

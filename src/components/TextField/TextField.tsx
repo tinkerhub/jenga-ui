@@ -59,7 +59,7 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
                     disabled={disabled}
                     name={name}
                 />
-                <small className="mt-1 text-sm font-normal text-gray-600">{helperText}</small>
+                <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
             </div>
         );
     }

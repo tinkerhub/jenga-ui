@@ -1,15 +1,20 @@
 import Head from 'next/head';
+import { Container } from 'components';
 
-const Home = (): JSX.Element => {
+import JoinPageView from 'views/JoinPage';
+
+const JoinPage = (): JSX.Element => {
     return (
-        <div>
+        <div className="w-full h-full bg-background">
             <Head>
-                <title>Create Next App</title>
+                <title>Welcome To TinkerHub</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="text-blue-400 text-4xl text-center">Hello World</div>
+            <Container>
+                <JoinPageView />
+            </Container>
         </div>
     );
 };
 
-export default Home;
+export default JoinPage;

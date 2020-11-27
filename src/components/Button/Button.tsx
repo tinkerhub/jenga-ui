@@ -2,14 +2,15 @@ import React from 'react';
 import clsx from 'clsx';
 
 export type ButtonProps = {
-    onClick?: () => void;
     children: React.ReactNode;
-    variant?: 'contained';
     color?: 'primary' | 'secondary';
-    fullWidth?: boolean;
+    className?: string;
     disabled?: boolean;
-    type?: 'button' | 'submit' | 'reset';
+    fullWidth?: boolean;
+    onClick?: () => void;
     rounded?: boolean;
+    type?: 'button' | 'submit' | 'reset';
+    variant?: 'contained';
 };
 
 export type Ref = HTMLButtonElement;
@@ -19,6 +20,7 @@ const Button = React.forwardRef<Ref, ButtonProps>(
         {
             onClick,
             children,
+            className,
             variant = 'contained',
             fullWidth = false,
             disabled = false,
@@ -37,6 +39,7 @@ const Button = React.forwardRef<Ref, ButtonProps>(
                 type={type}
                 onClick={onClick}
                 className={clsx(
+                    className,
                     'py-2 px-4 hover:shadow-md outline-none focus:outline-none mr-1 mb-1',
                     buttonType[variant],
                     fullWidth && 'w-full',

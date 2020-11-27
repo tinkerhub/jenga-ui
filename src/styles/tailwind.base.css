@@ -24,4 +24,7 @@
     .link {
         @apply text-primary no-underline hover:underline;
     }
+    .subtext {
+        @apply text-xs;
+    }
 }
