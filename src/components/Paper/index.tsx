@@ -1,3 +1,1 @@
-import Paper from './Paper';
-
-export default Paper;
+export { default as Paper } from './Paper';
