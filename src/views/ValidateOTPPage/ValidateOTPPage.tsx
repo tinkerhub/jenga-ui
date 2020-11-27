@@ -6,7 +6,7 @@ const JoinPage = (): JSX.Element => {
         <div className="w-full h-full flex justify-center ">
             <Transition
                 show={true}
-                enter="transition-opacity duration-500"
+                enter="transition-opacity duration-200 ease-in-out"
                 enterFrom="opacity-0"
                 enterTo="opacity-100"
                 leave="transition-opacity duration-150"

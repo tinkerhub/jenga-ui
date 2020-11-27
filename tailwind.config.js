@@ -7,15 +7,9 @@ module.exports = {
                 dmsans: ['DMSans', 'sans-serif'],
             },
             colors: {
-                primary: {
-                    DEFAULT: '#007bff',
-                },
-                background: {
-                    DEFAULT: '#C1EDD9',
-                },
-                subtext: {
-                    DEFAULT: '#696969',
-                },
+                primary: '#007bff',
+                background: '#C1EDD9',
+                subtext: '#696969',
             },
         },
     },

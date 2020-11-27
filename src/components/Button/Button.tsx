@@ -30,8 +30,15 @@ const Button = React.forwardRef<Ref, ButtonProps>(
         }: ButtonProps,
         ref
     ) => {
+        /**
+         * Applied nested object instead of just bg-<color>
+         * Becoz purge wont detect the classes like that so they get purged
+         */
         const buttonType = {
-            contained: `bg-${color}`,
+            contained: {
+                primary: `bg-primary`,
+                secondary: `bg-secondary`,
+            },
         };
 
         return (
@@ -41,7 +48,7 @@ const Button = React.forwardRef<Ref, ButtonProps>(
                 className={clsx(
                     className,
                     'py-2 px-4 hover:shadow-md outline-none focus:outline-none mr-1 mb-1',
-                    buttonType[variant],
+                    buttonType[variant][color],
                     fullWidth && 'w-full',
                     disabled && 'bg-opacity-25',
                     rounded && 'rounded'
