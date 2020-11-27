@@ -27,16 +27,24 @@ const JoinPage = (): JSX.Element => {
                         <Paper rounded>
                             <form>
                                 <TextField
-                                    label="Mobile Number"
-                                    name="mobile"
-                                    helperText="Please enter your 10 digit mobile number"
+                                    label="Enter your 6 digit OTP"
+                                    name="otp"
+                                    helperText="We sent a 6 digit OTP to your number"
                                     required
                                 />
                                 <Button fullWidth type="submit" className="mt-4" rounded>
-                                    <span className="text-white">Get OTP</span>
+                                    <span className="text-white">Verify Mobile Number</span>
                                 </Button>
                             </form>
                         </Paper>
+                        <div className="px-4 mt-8">
+                            <div className="text-blue-500 font-medium cursor-pointer py-2">
+                                Resent OTP →
+                            </div>
+                            <div className="text-blue-500 font-medium cursor-pointer py-2">
+                                Edit mobile number →
+                            </div>
+                        </div>
                     </div>
                 )}
             </Transition>

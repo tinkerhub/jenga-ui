@@ -13,6 +13,7 @@ export type TextFieldProps = {
     name: string;
     type?: 'text' | 'password' | 'number';
     rounded?: boolean;
+    required?: boolean;
 };
 
 export type Ref = HTMLInputElement;
@@ -30,6 +31,7 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
             placeholder,
             label,
             helperText,
+            required,
         }: TextFieldProps,
         ref
     ) => {
@@ -58,6 +60,7 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
                     placeholder={placeholder}
                     disabled={disabled}
                     name={name}
+                    required={required}
                 />
                 <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
             </div>
