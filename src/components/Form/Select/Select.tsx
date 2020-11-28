@@ -2,6 +2,7 @@ import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import BaseSelect, { Styles } from 'react-select';
 import { getOptionLabel, getOptionValue } from 'react-select/src/builtins';
+import { FormFieldWrapper } from '../FormFieldWrapper';
 
 type SelectProps = {
     control?: Control;
@@ -35,12 +36,7 @@ const Select: React.FC<SelectProps> = ({
     };
 
     return (
-        <div className="flex flex-col">
-            {label ? (
-                <label className="mb-2 text-current" htmlFor={name}>
-                    {label}
-                </label>
-            ) : null}
+        <FormFieldWrapper label={label} helperText={helperText}>
             <Controller
                 name={name}
                 as={BaseSelect}
@@ -53,8 +49,7 @@ const Select: React.FC<SelectProps> = ({
                 getOptionValue={optionValue}
                 getOptionLabel={optionLabel}
             />
-            <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
-        </div>
+        </FormFieldWrapper>
     );
 };
 

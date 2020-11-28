@@ -6,6 +6,7 @@ import { getOptionLabel, getOptionValue } from 'react-select/src/builtins';
 
 type AsyncSelectProps = {
     control?: Control;
+    defaultValue?: string;
     defaultOptions?: Array<Record<string, unknown>> | boolean;
     name: string;
     placeholder?: string;
@@ -18,6 +19,7 @@ type AsyncSelectProps = {
 
 const AsyncSelect: React.FC<AsyncSelectProps> = ({
     control,
+    defaultValue,
     defaultOptions = true,
     options,
     name,
@@ -54,6 +56,7 @@ const AsyncSelect: React.FC<AsyncSelectProps> = ({
                 loadOptions={options}
                 getOptionValue={optionValue}
                 getOptionLabel={optionLabel}
+                defaultValue={defaultValue}
             />
             <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
         </div>
