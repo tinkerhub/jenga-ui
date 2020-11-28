@@ -1,7 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
+import { FormFieldWrapper } from '../FormFieldWrapper';
 
 export type TextFieldProps = {
+    error?: boolean;
     onChange?: () => void;
     variant?: 'contained';
     color?: 'primary' | 'secondary';
@@ -21,6 +23,7 @@ export type Ref = HTMLInputElement;
 const TextField = React.forwardRef<Ref, TextFieldProps>(
     (
         {
+            error,
             name,
             onChange,
             variant = 'contained',
@@ -40,18 +43,14 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
         };
 
         return (
-            <div className="flex flex-col">
-                {label ? (
-                    <label className="mb-2 text-current" htmlFor={name}>
-                        {label}
-                    </label>
-                ) : null}
+            <FormFieldWrapper label={label} helperText={helperText} error={error}>
                 <input
                     type={type}
                     onChange={onChange}
                     className={clsx(
                         TextFieldType[variant],
-                        'px-3 py-3 relative rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
+                        'block px-3 py-3 relative rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
+                        error && ' ring ring-red-600',
                         fullWidth && 'w-full',
                         disabled && 'bg-opacity-25',
                         rounded && 'rounded'
@@ -62,8 +61,7 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
                     name={name}
                     required={required}
                 />
-                <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
-            </div>
+            </FormFieldWrapper>
         );
     }
 );

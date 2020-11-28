@@ -1,18 +1,25 @@
 import React from 'react';
+import clsx from 'clsx';
 
 type FormWrapperProps = {
     label?: string;
     helperText?: string;
+    error?: boolean;
 };
 
-const FormWrapper: React.FC<FormWrapperProps> = ({ children, helperText, label }) => {
+const FormWrapper: React.FC<FormWrapperProps> = ({ children, helperText, label, error }) => {
     return (
         <div>
-            {label ? <label className="mb-2 text-current">{label}</label> : null}
-            <br />
+            {label ? <label className="block mb-2 text-current">{label}</label> : null}
             {children}
-            <br />
-            <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
+            <small
+                className={clsx(
+                    'block mt-1 text-xs font-normal text-gray-600',
+                    error && 'text-red-600'
+                )}
+            >
+                {helperText}
+            </small>
         </div>
     );
 };

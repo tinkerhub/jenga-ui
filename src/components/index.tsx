@@ -4,4 +4,4 @@ export { Paper } from './Paper';
 export { Select } from './Form/Select';
 export { AsyncSelect } from './Form/AsyncSelect';
 export { Datepicker } from './Form/DatePicker';
-export { TextField } from './TextField';
+export { TextField } from './Form/TextField';

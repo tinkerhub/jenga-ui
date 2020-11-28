@@ -33,3 +33,15 @@ export const HelperText = (): JSX.Element => {
         />
     );
 };
+
+export const Errored = (): JSX.Element => {
+    return (
+        <TextField
+            rounded
+            name="roundedTextField"
+            label="Mobile Number"
+            helperText="Number mistaken"
+            error
+        />
+    );
+};

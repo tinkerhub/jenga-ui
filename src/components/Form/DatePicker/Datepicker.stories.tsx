@@ -25,3 +25,17 @@ export const HelperText = (): JSX.Element => {
         />
     );
 };
+
+export const FullWidth = (): JSX.Element => {
+    const { control } = useForm();
+    return (
+        <Datepicker
+            placeholder="Input date"
+            name="default"
+            control={control}
+            label="Birth Date"
+            helperText="Input your birthdate"
+            fullWidth
+        />
+    );
+};

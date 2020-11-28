@@ -7,6 +7,7 @@ import { FormFieldWrapper } from '../FormFieldWrapper';
 type SelectProps = {
     control?: Control;
     defaultValue?: '';
+    error?: boolean;
     name: string;
     placeholder?: string;
     label?: string;
@@ -19,6 +20,7 @@ type SelectProps = {
 const Select: React.FC<SelectProps> = ({
     control,
     defaultValue = '',
+    error,
     options,
     name,
     placeholder = 'select',
@@ -36,7 +38,7 @@ const Select: React.FC<SelectProps> = ({
     };
 
     return (
-        <FormFieldWrapper label={label} helperText={helperText}>
+        <FormFieldWrapper label={label} helperText={helperText} error={error}>
             <Controller
                 name={name}
                 as={BaseSelect}

@@ -3,9 +3,11 @@ import { Control, Controller } from 'react-hook-form';
 import BaseAsyncSelect from 'react-select/async';
 import { Styles } from 'react-select';
 import { getOptionLabel, getOptionValue } from 'react-select/src/builtins';
+import { FormFieldWrapper } from '../FormFieldWrapper';
 
 type AsyncSelectProps = {
     control?: Control;
+    error?: boolean;
     defaultValue?: string;
     defaultOptions?: Array<Record<string, unknown>> | boolean;
     name: string;
@@ -21,6 +23,7 @@ const AsyncSelect: React.FC<AsyncSelectProps> = ({
     control,
     defaultValue,
     defaultOptions = true,
+    error,
     options,
     name,
     placeholder = 'AsyncSelect',
@@ -38,12 +41,7 @@ const AsyncSelect: React.FC<AsyncSelectProps> = ({
     };
 
     return (
-        <div className="flex flex-col">
-            {label ? (
-                <label className="mb-2 text-current" htmlFor={name}>
-                    {label}
-                </label>
-            ) : null}
+        <FormFieldWrapper label={label} helperText={helperText} error={error}>
             <Controller
                 name={name}
                 as={BaseAsyncSelect}
@@ -58,8 +56,7 @@ const AsyncSelect: React.FC<AsyncSelectProps> = ({
                 getOptionLabel={optionLabel}
                 defaultValue={defaultValue}
             />
-            <small className="mt-1 text-xs font-normal text-gray-600">{helperText}</small>
-        </div>
+        </FormFieldWrapper>
     );
 };
 
