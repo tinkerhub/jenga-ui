@@ -41,6 +41,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                         placeholderText={placeholder}
                         popperPlacement="top-start"
                         required={required}
+                        wrapperClassName={clsx(fullWidth && 'w-full')}
                         className={clsx(
                             'px-3 py-3 rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
                             error && 'ring ring-red-600',
@@ -49,25 +50,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
                     />
                 )}
             />
-            <style jsx>{`
-                .react-datepicker-wrapper {
-                    width: ${fullWidth ? '100%' : 'inherit'};
-                }
-                .react-datepicker__header {
-                    background: none;
-                    color: black;
-                }
-                .react-datepicker__day-name,
-                .react-datepicker__current-month {
-                    color: black;
-                }
-                .react-datepicker__navigation--next {
-                    border-left-color: black;
-                }
-                .react-datepicker__navigation--previous {
-                    border-right-color: black;
-                }
-            `}</style>
         </FormFieldWrapper>
     );
 };

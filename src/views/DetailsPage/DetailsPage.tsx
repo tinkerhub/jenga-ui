@@ -1,4 +1,4 @@
-import { Button, Datepicker, Paper, Select, TextField } from 'components';
+import { Button, Datepicker, Paper, Select, TextArea, TextField } from 'components';
 import { Transition } from '@headlessui/react';
 import { useForm } from 'react-hook-form';
 import { formData } from './formData';
@@ -57,6 +57,18 @@ const DetailsPage = (): JSX.Element => {
                                                 key={index}
                                             />
                                         );
+                                    case 'textArea':
+                                        return (
+                                            <TextArea
+                                                name={name}
+                                                label={label}
+                                                helperText={helperText}
+                                                required
+                                                fullWidth
+                                                ref={register}
+                                                key={index}
+                                            />
+                                        );
                                     case 'date':
                                         return (
                                             <Datepicker
@@ -64,6 +76,7 @@ const DetailsPage = (): JSX.Element => {
                                                 label={label}
                                                 helperText={helperText}
                                                 required
+                                                fullWidth
                                                 control={control}
                                                 key={index}
                                             />
@@ -85,6 +98,17 @@ const DetailsPage = (): JSX.Element => {
                                 }
                             }
                         )}
+                        <div className="mb-4">
+                            <span className="block mb-2 text-current">Community policy</span>
+                            <small className="block mt-1 text-xs font-normal text-gray-600">
+                                To ensure that everything is in order, we ask that you accept our
+                                community policy & guideline before we moving forward.
+                                TinkerHub-Community-Policy Please click below if you find our policy
+                                acceptable. If you want to talk, we are available at
+                                hello@tinkerhub.org
+                            </small>
+                        </div>
+                        <TextField name="accept" type="checkbox" label="I Accept" />
                         <Button fullWidth type="submit" className="mt-4" rounded>
                             <span className="text-white">Apply Now</span>
                         </Button>

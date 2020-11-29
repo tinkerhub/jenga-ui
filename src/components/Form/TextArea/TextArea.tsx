@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 
-export type TextFieldProps = {
+export type TextAreaProps = {
     error?: boolean;
     onChange?: () => void;
     variant?: 'contained';
@@ -13,14 +13,16 @@ export type TextFieldProps = {
     fullWidth?: boolean;
     disabled?: boolean;
     name: string;
-    type?: 'text' | 'password' | 'number' | 'checkbox';
+    rows?: number;
+    cols?: number;
+    type?: 'text' | 'password' | 'number';
     rounded?: boolean;
     required?: boolean;
 };
 
-export type Ref = HTMLInputElement;
+export type Ref = HTMLTextAreaElement;
 
-const TextField = React.forwardRef<Ref, TextFieldProps>(
+const TextArea = React.forwardRef<Ref, TextAreaProps>(
     (
         {
             error,
@@ -29,26 +31,26 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
             variant = 'contained',
             fullWidth = false,
             disabled = false,
-            type = 'text',
             rounded = false,
             placeholder,
             label,
             helperText,
             required,
-        }: TextFieldProps,
+            rows = 10,
+            cols = 30,
+        }: TextAreaProps,
         ref
     ) => {
-        const TextFieldType = {
+        const TextAreaType = {
             contained: `bg-white placeholder-gray-400 text-gray-700`,
         };
 
         return (
             <FormFieldWrapper label={label} helperText={helperText} error={error}>
-                <input
-                    type={type}
+                <textarea
                     onChange={onChange}
                     className={clsx(
-                        TextFieldType[variant],
+                        TextAreaType[variant],
                         'block px-3 py-3 relative rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
                         error && ' ring ring-red-600',
                         fullWidth && 'w-full',
@@ -60,12 +62,14 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
                     disabled={disabled}
                     name={name}
                     required={required}
+                    rows={rows}
+                    cols={cols}
                 />
             </FormFieldWrapper>
         );
     }
 );
 
-TextField.displayName = 'TextField';
+TextArea.displayName = 'TextArea';
 
-export default TextField;
+export default TextArea;

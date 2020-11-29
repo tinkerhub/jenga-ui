@@ -17,3 +17,22 @@ a {
 * {
     box-sizing: border-box;
 }
+
+.react-datepicker-wrapper {
+    width: 100%;
+    display: block;
+}
+.react-datepicker__header {
+    background: none;
+    color: black;
+}
+.react-datepicker__day-name,
+.react-datepicker__current-month {
+    color: black;
+}
+.react-datepicker__navigation--next {
+    border-left-color: black;
+}
+.react-datepicker__navigation--previous {
+    border-right-color: black;
+}

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getNextNYears } from './utils/getNextNYears';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export const formData = [
     {
         type: 'textfield',
@@ -89,7 +90,7 @@ export const formData = [
         optionLabel: (option: any): string => `${option.valueAndlabel}`,
     },
     {
-        type: 'textfield',
+        type: 'textArea',
         label: 'I want to join Tinkerhub because..',
         helperText:
             'This answer will help us to understand you better and handle your application accordingly.',
