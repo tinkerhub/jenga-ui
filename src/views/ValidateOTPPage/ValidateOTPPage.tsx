@@ -31,6 +31,7 @@ const JoinPage = (): JSX.Element => {
                                     name="otp"
                                     helperText="We sent a 6 digit OTP to your number"
                                     required
+                                    fullWidth
                                 />
                                 <Button fullWidth type="submit" className="mt-4" rounded>
                                     <span className="text-white">Verify Mobile Number</span>

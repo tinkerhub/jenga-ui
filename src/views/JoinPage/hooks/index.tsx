@@ -1,0 +1,1 @@
+export { useJoinPage } from './useJoinPage';
