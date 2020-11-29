@@ -13,8 +13,8 @@ type SelectProps = {
     label?: string;
     helperText?: string;
     options: Array<Record<string, unknown>>;
-    optionLabel: getOptionLabel;
-    optionValue: getOptionValue;
+    optionLabel: getOptionLabel | undefined;
+    optionValue: getOptionValue | undefined;
 };
 
 const Select: React.FC<SelectProps> = ({

@@ -9,7 +9,7 @@ type FormWrapperProps = {
 
 const FormWrapper: React.FC<FormWrapperProps> = ({ children, helperText, label, error }) => {
     return (
-        <div>
+        <div className="mb-4">
             {label ? <label className="block mb-2 text-current">{label}</label> : null}
             {children}
             <small

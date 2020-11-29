@@ -14,6 +14,7 @@ type DatePickerProps = {
     placeholder?: string;
     label?: string;
     helperText?: string;
+    required?: boolean;
 };
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -25,6 +26,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     placeholder = 'date-time',
     helperText,
     label,
+    required,
 }) => {
     return (
         <FormFieldWrapper label={label} helperText={helperText} error={error}>
@@ -38,6 +40,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                         onChange={onChange}
                         placeholderText={placeholder}
                         popperPlacement="top-start"
+                        required={required}
                         className={clsx(
                             'px-3 py-3 rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
                             error && 'ring ring-red-600',
