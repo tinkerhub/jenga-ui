@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { AuthContextProps, UserSessionData } from '.';
 
-const AuthContext = createContext<AuthContextProps>({});
+const AuthContext = createContext<AuthContextProps | Record<string, unknown>>({});
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<UserSessionData | null>(null);
@@ -55,4 +55,4 @@ export const AuthProvider: React.FC = ({ children }) => {
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = (): AuthContextProps => useContext(AuthContext);
+export const useAuth = (): AuthContextProps => useContext(AuthContext) as AuthContextProps;

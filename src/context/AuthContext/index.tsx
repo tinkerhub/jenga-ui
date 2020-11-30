@@ -6,8 +6,8 @@ export interface UserSessionData {
 export interface AuthContextProps {
     number?: string;
     memberID?: string;
-    setSessionData?: (sessionDetails: UserSessionData) => void;
-    removeSessionData?: () => void;
+    setSessionData: (sessionDetails: UserSessionData) => void;
+    removeSessionData: () => void;
     loading?: boolean;
 }
 

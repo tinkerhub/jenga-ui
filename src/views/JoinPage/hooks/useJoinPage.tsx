@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { sendOTPAPI } from 'api';
 import { useForm, UseFormMethods } from 'react-hook-form';
+import { useAuth } from 'context/AuthContext';
 
 type SendOTPFormInput = { number: string };
 
@@ -16,12 +17,18 @@ type useJoinPageReturn = {
 
 export const useJoinPage = (): useJoinPageReturn => {
     const [sendOTPError, setSendOTPError] = useState(null);
+    const { number, setSessionData } = useAuth();
     const router = useRouter();
-    const { register, errors, handleSubmit } = useForm<SendOTPFormInput>();
+    const { register, errors, handleSubmit } = useForm<SendOTPFormInput>({
+        defaultValues: {
+            number,
+        },
+    });
 
     const sendOTP: SendOTPFormSubmission = async ({ number }) => {
         try {
             await sendOTPAPI(number);
+            setSessionData({ number });
             router.push('/validate');
         } catch (error) {
             setSendOTPError(error.message);
