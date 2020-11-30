@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { sendOTPAPI } from '../services';
+import { sendOTPAPI } from 'api';
 import { useForm, UseFormMethods } from 'react-hook-form';
 
 type SendOTPFormInput = { number: string };
