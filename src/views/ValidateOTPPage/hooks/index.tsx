@@ -1,0 +1,1 @@
+export { useValidateOTP } from './useValidateOTP';

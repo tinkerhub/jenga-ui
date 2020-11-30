@@ -1,7 +1,10 @@
 import { Button, Paper, TextField } from 'components';
 import { Transition } from '@headlessui/react';
+import { useValidateOTP } from './hooks';
 
-const JoinPage = (): JSX.Element => {
+const ValidateOTPPage = (): JSX.Element => {
+    const { register, errors, handleSubmit, validateOTPError } = useValidateOTP();
+
     return (
         <div className="w-full h-full flex justify-center ">
             <Transition
@@ -25,13 +28,31 @@ const JoinPage = (): JSX.Element => {
                             </p>
                         </div>
                         <Paper rounded>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <TextField
                                     label="Enter your 6 digit OTP"
                                     name="otp"
-                                    helperText="We sent a 6 digit OTP to your number"
                                     required
                                     fullWidth
+                                    error={
+                                        typeof validateOTPError === 'string' || errors?.otp?.message
+                                    }
+                                    helperText={
+                                        validateOTPError ||
+                                        errors?.otp?.message ||
+                                        'Please enter your 10 digit mobile number'
+                                    }
+                                    ref={register({
+                                        required: true,
+                                        maxLength: {
+                                            value: 6,
+                                            message: 'OTP code must have length 6',
+                                        },
+                                        minLength: {
+                                            value: 6,
+                                            message: 'Minimum length of an OTP is 6',
+                                        },
+                                    })}
                                 />
                                 <Button fullWidth type="submit" className="mt-4" rounded>
                                     <span className="text-white">Verify Mobile Number</span>
@@ -53,4 +74,4 @@ const JoinPage = (): JSX.Element => {
     );
 };
 
-export default JoinPage;
+export default ValidateOTPPage;

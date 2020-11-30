@@ -10,7 +10,7 @@ type ThankYouAndExistPageProps = {
 };
 
 const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, subBody }) => {
-    const { memberID, copiedTextStatus, copyToClipboard } = useThankYouAndExist();
+    const { memberID, copiedTextStatus, copyToClipboard, logout } = useThankYouAndExist();
     const router = useRouter();
 
     if (!memberID) {
@@ -42,13 +42,16 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                                 <h1>{memberID}</h1>
                                 <Button
                                     fullWidth
-                                    className="mt-4"
+                                    className="mt-4 mb-2"
                                     rounded
                                     onClick={copyToClipboard}
                                 >
                                     <span className="text-white">
                                         {copiedTextStatus === 'copied' ? 'Copied' : 'Copy text'}
                                     </span>
+                                </Button>
+                                <Button fullWidth className="mt-4" rounded onClick={logout}>
+                                    <span className="text-white">Logout</span>
                                 </Button>
                             </form>
                         </Paper>

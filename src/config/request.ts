@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 axios.defaults.withCredentials = true;
 interface RequestReturn<T> {
     data: T | null;
-    error: Error | null;
+    error: AxiosError | null;
 }
 
 /**
