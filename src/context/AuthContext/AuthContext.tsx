@@ -1,9 +1,9 @@
 import getSessionData from 'api/getSessionData';
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { AuthContext, UserSessionData } from '.';
+import { AuthContextProps, UserSessionData } from '.';
 
-const AuthContext = createContext<AuthContext | Record<string, unknown>>({});
+const AuthContext = createContext<AuthContextProps>({});
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<UserSessionData | null>(null);
@@ -49,11 +49,10 @@ export const AuthProvider: React.FC = ({ children }) => {
             loading,
         }),
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [user?.memberShipID, user?.number]
+        [user?.memberShipID, user?.number, loading]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = (): AuthContext | Record<string, unknown> => useContext(AuthContext);
+export const useAuth = (): AuthContextProps => useContext(AuthContext);
