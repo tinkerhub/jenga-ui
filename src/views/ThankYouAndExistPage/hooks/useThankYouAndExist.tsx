@@ -8,10 +8,12 @@ interface useThankYouAndExistReturn {
     copiedTextStatus: string;
     copyToClipboard: () => void;
     logout: () => Promise<void>;
+    apiLoading: boolean;
 }
 
 export const useThankYouAndExist = (): useThankYouAndExistReturn => {
     const { memberID, removeSessionData } = useAuth();
+    const [apiLoading, setApiLoading] = useState(false);
     const [copiedTextStatus, setCopiedTextStatus] = useState('');
     const router = useRouter();
 
@@ -23,10 +25,12 @@ export const useThankYouAndExist = (): useThankYouAndExistReturn => {
     };
 
     const logout = async (): Promise<void> => {
+        setApiLoading(true);
         await clearSessionAPI();
         removeSessionData();
+        setApiLoading(false);
         router.push('/');
     };
 
-    return { memberID, copiedTextStatus, copyToClipboard, logout };
+    return { memberID, copiedTextStatus, copyToClipboard, logout, apiLoading };
 };

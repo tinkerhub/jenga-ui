@@ -13,13 +13,19 @@ type useJoinPageReturn = {
     handleSubmit: HTMLFormElement['submit'];
     register: UseFormMethods['register'];
     errors: UseFormMethods['errors'];
+    isSubmitting: boolean;
 };
 
 export const useValidateOTP = (): useJoinPageReturn => {
     const [validateOTPError, setvalidateOTPError] = useState(null);
     const router = useRouter();
     const { setSessionData } = useAuth();
-    const { register, errors, handleSubmit } = useForm<validateOTPFormInput>();
+    const {
+        register,
+        errors,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = useForm<validateOTPFormInput>();
 
     const validateOTP: validateOTPFormSubmission = async ({ otp }) => {
         try {
@@ -35,5 +41,11 @@ export const useValidateOTP = (): useJoinPageReturn => {
         }
     };
 
-    return { validateOTPError, handleSubmit: handleSubmit(validateOTP), errors, register };
+    return {
+        validateOTPError,
+        handleSubmit: handleSubmit(validateOTP),
+        errors,
+        register,
+        isSubmitting,
+    };
 };

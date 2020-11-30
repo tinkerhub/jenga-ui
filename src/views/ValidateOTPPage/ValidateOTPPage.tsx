@@ -4,7 +4,7 @@ import { Transition } from '@headlessui/react';
 import { useValidateOTP } from './hooks';
 
 const ValidateOTPPage = (): JSX.Element => {
-    const { register, errors, handleSubmit, validateOTPError } = useValidateOTP();
+    const { register, errors, handleSubmit, validateOTPError, isSubmitting } = useValidateOTP();
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -35,6 +35,7 @@ const ValidateOTPPage = (): JSX.Element => {
                                     name="otp"
                                     required
                                     fullWidth
+                                    disabled={isSubmitting}
                                     error={
                                         typeof validateOTPError === 'string' || errors?.otp?.message
                                     }
@@ -55,7 +56,13 @@ const ValidateOTPPage = (): JSX.Element => {
                                         },
                                     })}
                                 />
-                                <Button fullWidth type="submit" className="mt-4" rounded>
+                                <Button
+                                    fullWidth
+                                    type="submit"
+                                    className="mt-4"
+                                    rounded
+                                    loading={isSubmitting}
+                                >
                                     <span className="text-white">Verify Mobile Number</span>
                                 </Button>
                             </form>

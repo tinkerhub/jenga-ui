@@ -10,6 +10,7 @@ type SendOTPFormSubmission = (arg: SendOTPFormInput) => Promise<void>;
 
 type useJoinPageReturn = {
     sendOTPError: string | null;
+    isSubmitting: boolean;
     handleSubmit: HTMLFormElement['submit'];
     register: UseFormMethods['register'];
     errors: UseFormMethods['errors'];
@@ -19,7 +20,12 @@ export const useJoinPage = (): useJoinPageReturn => {
     const [sendOTPError, setSendOTPError] = useState(null);
     const { number, setSessionData } = useAuth();
     const router = useRouter();
-    const { register, errors, handleSubmit } = useForm<SendOTPFormInput>({
+    const {
+        register,
+        errors,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = useForm<SendOTPFormInput>({
         defaultValues: {
             number,
         },
@@ -35,5 +41,5 @@ export const useJoinPage = (): useJoinPageReturn => {
         }
     };
 
-    return { sendOTPError, handleSubmit: handleSubmit(sendOTP), errors, register };
+    return { sendOTPError, handleSubmit: handleSubmit(sendOTP), errors, register, isSubmitting };
 };

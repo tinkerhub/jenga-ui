@@ -3,7 +3,7 @@ import { Transition } from '@headlessui/react';
 import { useJoinPage } from './hooks';
 
 const JoinPage = (): JSX.Element => {
-    const { register, errors, handleSubmit, sendOTPError } = useJoinPage();
+    const { register, errors, handleSubmit, sendOTPError, isSubmitting } = useJoinPage();
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -44,8 +44,15 @@ const JoinPage = (): JSX.Element => {
                                 maxLength: { value: 10, message: 'Maximum length is 10' },
                                 minLength: { value: 10, message: 'Minimum length should be 10' },
                             })}
+                            disabled={isSubmitting}
                         />
-                        <Button fullWidth type="submit" className="mt-4" rounded>
+                        <Button
+                            fullWidth
+                            type="submit"
+                            className="mt-4"
+                            rounded
+                            loading={isSubmitting}
+                        >
                             <span className="text-white">Get OTP</span>
                         </Button>
                     </form>
