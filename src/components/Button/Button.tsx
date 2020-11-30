@@ -1,11 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
+import { ButtonSpinner } from './ButtonSpinner';
 
 export type ButtonProps = {
     children: React.ReactNode;
     color?: 'primary' | 'secondary';
     className?: string;
     disabled?: boolean;
+    loading?: boolean;
     fullWidth?: boolean;
     onClick?: () => void;
     rounded?: boolean;
@@ -23,6 +25,7 @@ const Button = React.forwardRef<Ref, ButtonProps>(
             className,
             variant = 'contained',
             fullWidth = false,
+            loading = false,
             disabled = false,
             type = 'button',
             color = 'primary',
@@ -56,7 +59,13 @@ const Button = React.forwardRef<Ref, ButtonProps>(
                 ref={ref}
                 disabled={disabled}
             >
-                {children}
+                {loading ? (
+                    <div className="w-full flex items-center justify-center">
+                        <ButtonSpinner />
+                    </div>
+                ) : (
+                    children
+                )}
             </button>
         );
     }

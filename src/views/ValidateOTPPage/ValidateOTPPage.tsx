@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button, Paper, TextField } from 'components';
 import { Transition } from '@headlessui/react';
 import { useValidateOTP } from './hooks';
@@ -60,12 +61,11 @@ const ValidateOTPPage = (): JSX.Element => {
                             </form>
                         </Paper>
                         <div className="px-4 mt-8">
-                            <div className="text-blue-500 font-medium cursor-pointer py-2">
-                                Resent OTP →
-                            </div>
-                            <div className="text-blue-500 font-medium cursor-pointer py-2">
-                                Edit mobile number →
-                            </div>
+                            <Link href="/">
+                                <div className="text-blue-500 font-medium cursor-pointer py-2">
+                                    Edit mobile number →
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 )}
