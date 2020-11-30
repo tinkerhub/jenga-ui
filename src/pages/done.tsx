@@ -26,7 +26,7 @@ const DonePage = (): JSX.Element => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Container>
-                <ThankYouAndExistPage header={Title} subBody={subBody} memberShipID="652145" />
+                <ThankYouAndExistPage header={Title} subBody={subBody} />
             </Container>
         </div>
     );

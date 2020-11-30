@@ -1,0 +1,1 @@
+export { useThankYouAndExist } from './useThankYouAndExist';

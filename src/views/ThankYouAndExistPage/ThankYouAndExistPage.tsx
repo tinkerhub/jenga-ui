@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Paper } from 'components';
 import { Transition } from '@headlessui/react';
+import { useThankYouAndExist } from './hooks';
+import { useRouter } from 'next/router';
 
 type ThankYouAndExistPageProps = {
     header: JSX.Element;
     subBody: JSX.Element;
-    memberShipID: string;
 };
 
-const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({
-    header,
-    subBody,
-    memberShipID,
-}) => {
-    const [copiedTextStatus, setCopiedTextStatus] = useState('');
+const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, subBody }) => {
+    const { memberID, copiedTextStatus, copyToClipboard } = useThankYouAndExist();
+    const router = useRouter();
 
-    const copyToClipboard = (): void => {
-        navigator.clipboard.writeText(memberShipID);
-        setCopiedTextStatus('copied');
-    };
+    if (!memberID) {
+        router.push('/');
+        return <div />;
+    }
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -41,7 +39,7 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({
                             <form>
                                 <hr className="mb-4" />
                                 <p>YOUR MEMBERSHIP ID</p>
-                                <h1>{memberShipID}</h1>
+                                <h1>{memberID}</h1>
                                 <Button
                                     fullWidth
                                     className="mt-4"

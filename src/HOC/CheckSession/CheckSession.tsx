@@ -4,9 +4,11 @@ import { useAuth } from 'context/AuthContext';
 
 const CheckSession: React.FC = ({ children }) => {
     const { loading } = useAuth();
-    if (loading || window.location.pathname !== '/') {
+
+    if (loading) {
         return <Spinner />;
     }
+
     return <>{children}</>;
 };
 
