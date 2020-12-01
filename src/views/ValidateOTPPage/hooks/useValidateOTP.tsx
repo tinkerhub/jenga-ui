@@ -18,6 +18,7 @@ type useJoinPageReturn = {
 
 export const useValidateOTP = (): useJoinPageReturn => {
     const [validateOTPError, setvalidateOTPError] = useState(null);
+    const { number } = useAuth();
     const router = useRouter();
     const { setSessionData } = useAuth();
     const {
@@ -34,6 +35,7 @@ export const useValidateOTP = (): useJoinPageReturn => {
                 setSessionData({ memberShipID });
                 router.push('/exist');
             } else {
+                setSessionData({ verified: true, number });
                 router.push('/details');
             }
         } catch (error) {

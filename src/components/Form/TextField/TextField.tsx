@@ -52,7 +52,7 @@ const TextField = React.forwardRef<Ref, TextFieldProps>(
                         'block px-3 py-3 relative rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
                         error && ' ring ring-red-600',
                         fullWidth && 'w-full',
-                        disabled && 'bg-opacity-25',
+                        disabled && 'bg-opacity-25 bg-gray-400',
                         rounded && 'rounded'
                     )}
                     ref={ref}

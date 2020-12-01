@@ -1,0 +1,1 @@
+export { useDetailsPage } from './useDetailsPage';

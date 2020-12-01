@@ -2,6 +2,7 @@ import { request } from 'config/request';
 
 interface SentOTPAPIReturn {
     message: string;
+    token: string;
 }
 
 const sendOTPAPI = async (number: string): Promise<SentOTPAPIReturn> => {

@@ -1,10 +1,24 @@
 import { Button, Datepicker, Paper, Select, TextArea, TextField } from 'components';
 import { Transition } from '@headlessui/react';
-import { useForm } from 'react-hook-form';
 import { formData } from './formData';
+import { useDetailsPage } from './hooks';
+import { useRouter } from 'next/router';
 
 const DetailsPage = (): JSX.Element => {
-    const { control, register } = useForm();
+    const {
+        handleSubmit,
+        register,
+        isSubmitting,
+        collegeList,
+        control,
+        verified,
+    } = useDetailsPage();
+    const router = useRouter();
+
+    if (!verified) {
+        router.push('/');
+        return <div />;
+    }
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -28,7 +42,7 @@ const DetailsPage = (): JSX.Element => {
                     </p>
                 </div>
                 <Paper rounded>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         {formData.map(
                             (
                                 {
@@ -40,6 +54,7 @@ const DetailsPage = (): JSX.Element => {
                                     options,
                                     optionLabel,
                                     optionValue,
+                                    preFetch,
                                 },
                                 index
                             ) => {
@@ -86,7 +101,14 @@ const DetailsPage = (): JSX.Element => {
                                             <Select
                                                 label={label}
                                                 name={name}
-                                                options={options ? options : []}
+                                                options={
+                                                    options
+                                                        ? preFetch && collegeList
+                                                            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                                              (collegeList as any)
+                                                            : options
+                                                        : []
+                                                }
                                                 optionLabel={optionLabel}
                                                 optionValue={optionValue}
                                                 control={control}
@@ -108,8 +130,21 @@ const DetailsPage = (): JSX.Element => {
                                 hello@tinkerhub.org
                             </small>
                         </div>
-                        <TextField name="accept" type="checkbox" label="I Accept" />
-                        <Button fullWidth type="submit" className="mt-4" rounded>
+                        <TextField
+                            name="accept"
+                            type="checkbox"
+                            label="I Accept"
+                            ref={register}
+                            required
+                        />
+                        <Button
+                            fullWidth
+                            type="submit"
+                            className="mt-4"
+                            rounded
+                            disabled={isSubmitting}
+                            loading={isSubmitting}
+                        >
                             <span className="text-white">Apply Now</span>
                         </Button>
                     </form>

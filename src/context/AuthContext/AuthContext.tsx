@@ -5,20 +5,28 @@ import { AuthContextProps, UserSessionData } from '.';
 
 const AuthContext = createContext<AuthContextProps | Record<string, unknown>>({});
 
+const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || 'jenga_access_token';
+
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<UserSessionData | null>(null);
     const [loading, setLoading] = useState(true);
+    const token = localStorage.getItem(ACCESS_TOKEN) || null;
     const router = useRouter();
 
     useEffect(() => {
         const checkUserSession = async (): Promise<void> => {
             try {
-                const userDetails = await getSessionData();
-                setUser(userDetails);
-                if (userDetails.memberShipID) {
-                    router.push('/exist');
+                if (token) {
+                    const userDetails = await getSessionData();
+                    setUser(userDetails);
+                    if (userDetails.memberShipID) {
+                        router.push('/exist');
+                    }
+                    setLoading(false);
+                } else {
+                    router.replace('/');
+                    setLoading(false);
                 }
-                setLoading(false);
             } catch (error) {
                 setLoading(false);
                 router.replace('/');
@@ -29,10 +37,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     }, []);
 
     const setSessionData = (sessionDetails: UserSessionData): void => {
+        if (sessionDetails.token) {
+            localStorage.setItem(ACCESS_TOKEN, sessionDetails.token);
+        }
         setUser(sessionDetails);
     };
 
     const removeSessionData = (): void => {
+        localStorage.removeItem(ACCESS_TOKEN);
         setUser(null);
     };
 
@@ -44,12 +56,14 @@ export const AuthProvider: React.FC = ({ children }) => {
         () => ({
             number: user?.number,
             memberID: user?.memberShipID,
+            verified: user?.verified,
+            token: user?.token,
             setSessionData,
             removeSessionData,
             loading,
         }),
 
-        [user?.memberShipID, user?.number, loading]
+        [user?.memberShipID, user?.number, loading, user?.verified, user?.token]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
