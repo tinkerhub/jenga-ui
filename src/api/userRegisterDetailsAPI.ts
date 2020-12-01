@@ -3,6 +3,7 @@ import { request } from 'config/request';
 interface RegisterMemberDetailsReturn {
     message: string;
     memberShipID: string;
+    token: string;
 }
 
 export interface RegisterMemberDetailsArgument {

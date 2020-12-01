@@ -30,12 +30,12 @@ export const useValidateOTP = (): useJoinPageReturn => {
 
     const validateOTP: validateOTPFormSubmission = async ({ otp }) => {
         try {
-            const { memberShipID } = await validateOTPAPI(otp);
+            const { memberShipID, token } = await validateOTPAPI(otp);
             if (memberShipID) {
-                setSessionData({ memberShipID });
+                setSessionData({ memberShipID, token });
                 router.push('/exist');
             } else {
-                setSessionData({ verified: true, number });
+                setSessionData({ verified: true, number, token });
                 router.push('/details');
             }
         } catch (error) {

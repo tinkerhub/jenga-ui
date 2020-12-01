@@ -77,9 +77,9 @@ export const useDetailsPage = (): useDetailsPageReturn => {
                 StudyStream: preFormData.StudyStream.valueAndLabel,
                 GraduationDate: preFormData.GraduationDate.valueAndLabel,
             };
-            const { memberShipID } = await userRegisterDetailsAPI(formData);
+            const { memberShipID, token } = await userRegisterDetailsAPI(formData);
 
-            setSessionData({ memberShipID });
+            setSessionData({ memberShipID, token });
             router.push('/done');
         } catch (error) {
             setuserRegisterError(error.message);

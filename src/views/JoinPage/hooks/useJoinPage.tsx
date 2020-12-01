@@ -33,8 +33,8 @@ export const useJoinPage = (): useJoinPageReturn => {
 
     const sendOTP: SendOTPFormSubmission = async ({ number }) => {
         try {
-            await sendOTPAPI(number);
-            setSessionData({ number });
+            const { token } = await sendOTPAPI(number);
+            setSessionData({ number, token });
             router.push('/validate');
         } catch (error) {
             setSendOTPError(error.message);

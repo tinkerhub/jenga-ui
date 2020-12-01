@@ -10,7 +10,7 @@ const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || 'jenga_access_token';
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<UserSessionData | null>(null);
     const [loading, setLoading] = useState(true);
-    const token = localStorage.getItem(ACCESS_TOKEN) || null;
+    const token = process.browser ? localStorage.getItem(ACCESS_TOKEN) : null;
     const router = useRouter();
 
     useEffect(() => {
@@ -21,6 +21,10 @@ export const AuthProvider: React.FC = ({ children }) => {
                     setUser(userDetails);
                     if (userDetails.memberShipID) {
                         router.push('/exist');
+                    } else {
+                        if (userDetails.number && userDetails.verified) {
+                            router.push('/details');
+                        }
                     }
                     setLoading(false);
                 } else {

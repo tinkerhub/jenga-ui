@@ -7,6 +7,25 @@ interface RequestReturn<T> {
     error: AxiosError | null;
 }
 
+const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || 'jenga_access_token';
+
+/**
+ * An axios interceptor to convert js camelcase to python api
+ * canvert camelCase to snakecase
+ */
+axios.interceptors.request.use(
+    (req) => {
+        const token = localStorage.getItem(ACCESS_TOKEN);
+        if (token) {
+            req.headers.Authorization = `Bearer ${token}`;
+        }
+        return req;
+    },
+    (err) => {
+        return Promise.reject(err);
+    }
+);
+
 /**
  * A request wrapper for axios
  * @param options - all configuration for axios instance, methods, params
