@@ -33,6 +33,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 }
             } catch (error) {
                 setLoading(false);
+                localStorage.removeItem(ACCESS_TOKEN);
                 router.replace('/');
             }
         };

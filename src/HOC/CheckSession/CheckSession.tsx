@@ -2,10 +2,14 @@ import React from 'react';
 import { Spinner } from 'components';
 import { useAuth } from 'context/AuthContext';
 
-const CheckSession: React.FC = ({ children }) => {
+type CheckSessionProps = {
+    pageChange: boolean;
+};
+
+const CheckSession: React.FC<CheckSessionProps> = ({ children, pageChange }) => {
     const { loading } = useAuth();
 
-    if (loading) {
+    if (loading || pageChange) {
         return <Spinner />;
     }
 

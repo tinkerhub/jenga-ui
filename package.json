@@ -19,10 +19,12 @@
     },
     "dependencies": {
         "@headlessui/react": "^0.2.0",
+        "@types/nprogress": "^0.2.0",
         "axios": "^0.21.0",
         "clsx": "^1.1.1",
         "next": "10.0.3",
         "next-on-netlify": "^2.6.3",
+        "nprogress": "^0.2.0",
         "react": "17.0.1",
         "react-datepicker": "^3.3.0",
         "react-dom": "17.0.1",
