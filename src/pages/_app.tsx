@@ -1,5 +1,5 @@
 import { AuthProvider } from 'context/AuthContext';
-import { CheckSession } from 'HOC/CheckSession';
+import { CheckSession } from 'HOC/CheckAuth';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import Router from 'next/router';
 import { useState } from 'react';

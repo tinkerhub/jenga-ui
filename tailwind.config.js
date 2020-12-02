@@ -2,10 +2,10 @@ module.exports = {
     purge: ['./src/**/*.{js,ts,jsx,tsx}'],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        fontFamily: {
+            dmsans: ['DMSans', 'sans-serif'],
+        },
         extend: {
-            fontFamily: {
-                dmsans: ['DMSans', 'sans-serif'],
-            },
             colors: {
                 primary: '#007bff',
                 background: '#C1EDD9',

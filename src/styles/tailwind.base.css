@@ -3,23 +3,22 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply font-dmsans;
+    @font-face {
+        font-family: 'DMSans';
+        font-weight: normal;
+        font-style: normal;
+        src: url('../assets/fonts/DMSans-Regular.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'DMSans';
+        font-weight: 600;
+        src: url('../assets/fonts/DMSans-Bold.ttf') format('truetype');
     }
     h1 {
         @apply text-4xl pb-2 font-medium m-0 mb-2;
     }
     h5 {
         @apply text-xl pb-2 font-medium m-0 mb-2;
-    }
-    @font-face {
-        font-family: DMSans;
-        src: url(../assets/fonts/DMSans-Regular.ttf) format('ttf');
-    }
-    @font-face {
-        font-family: DMSans;
-        font-weight: 600;
-        src: url(../assets/fonts/DMSans-Bold.ttf) format('ttf');
     }
 }
 
