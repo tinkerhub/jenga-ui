@@ -39,7 +39,7 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                             <form>
                                 <hr className="mb-4" />
                                 <p>YOUR MEMBERSHIP ID</p>
-                                <h1>{memberID}</h1>
+                                <h1 className="select-all">{memberID}</h1>
                                 <Button
                                     fullWidth
                                     className="mt-4 mb-2"
@@ -55,6 +55,14 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                                 </Button>
                             </form>
                         </Paper>
+                        <div className="absolute bottom-4 right-4 hidden md:block">
+                            <iframe
+                                src="https://tinkerhub.substack.com/embed"
+                                style={{ border: '1px solid #EEE', background: 'white' }}
+                                scrolling="no"
+                                title="TinkerHub Newsletter"
+                            ></iframe>
+                        </div>
                     </div>
                 )}
             </Transition>
