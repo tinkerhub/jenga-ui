@@ -16,6 +16,7 @@ type SelectProps = {
     options?: Array<Record<string, any>>;
     optionLabel: getOptionLabel | undefined;
     optionValue: getOptionValue | undefined;
+    isMulti?: boolean;
 };
 
 const Select: React.FC<SelectProps> = ({
@@ -29,6 +30,7 @@ const Select: React.FC<SelectProps> = ({
     label,
     optionLabel,
     optionValue,
+    isMulti = false,
 }) => {
     const styles: Styles = {
         control: (provided) => ({
@@ -51,6 +53,7 @@ const Select: React.FC<SelectProps> = ({
                 placeholder={placeholder}
                 getOptionValue={optionValue}
                 getOptionLabel={optionLabel}
+                isMulti={isMulti}
             />
         </FormFieldWrapper>
     );

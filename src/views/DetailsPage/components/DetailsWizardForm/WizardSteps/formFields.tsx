@@ -108,3 +108,55 @@ export const wizardStepTwoFormFields = {
         },
     ],
 };
+
+export const wizardStepThreeFormFields = {
+    skills: {
+        type: 'select',
+        label: 'Skill',
+        name: 'My_Skills',
+        helperText: (isMentor: boolean) =>
+            isMentor ? 'You can mentor students in' : 'Your good at',
+        optionValue: (option: any): string => option.id,
+        optionLabel: (option: any): string => `${option.name}`,
+    },
+    address: [
+        {
+            type: 'textfield',
+            label: 'House Name',
+            name: 'House_Name',
+        },
+        {
+            type: 'textfield',
+            label: 'Street Name',
+            name: 'Street',
+        },
+        {
+            type: 'select',
+            label: 'District',
+            name: 'District',
+            options: [
+                { valueAndLabel: 'Alappuzha' },
+                { valueAndLabel: 'Ernakulam' },
+                { valueAndLabel: 'Idukki' },
+                { valueAndLabel: 'Kannur' },
+                { valueAndLabel: 'Kasaragod' },
+                { valueAndLabel: 'Kollam' },
+                { valueAndLabel: 'Kottayam' },
+                { valueAndLabel: 'Kozhikode' },
+                { valueAndLabel: 'Malappuram' },
+                { valueAndLabel: 'Palakkad' },
+                { valueAndLabel: 'Pathanamthitta' },
+                { valueAndLabel: 'Thiruvananthapuram' },
+                { valueAndLabel: 'Thrissur' },
+                { valueAndLabel: 'Wayanad' },
+            ],
+            optionValue: (option: any): string => option.valueAndLabel,
+            optionLabel: (option: any): string => `${option.valueAndLabel}`,
+        },
+        {
+            type: 'textfield',
+            label: 'Pincode',
+            name: 'Pincode',
+        },
+    ],
+};
