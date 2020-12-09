@@ -12,15 +12,9 @@ export const formData = [
     },
     {
         type: 'textfield',
-        label: 'My legal name is',
+        label: 'My full name is',
         helperText: 'eg: Aaron Hillel Swartz',
         name: 'FullName',
-    },
-    {
-        type: 'textfield',
-        label: 'Please call me',
-        helperText: 'Use your first name or a nickname. eg: aaron, psbots, meharmp',
-        name: 'NickName',
     },
     {
         type: 'date',
@@ -71,8 +65,8 @@ export const formData = [
         options: [
             { valueAndLabel: 'BTech' },
             { valueAndLabel: 'Polytechnic' },
-            { valueAndLabel: 'They/Them' },
             { valueAndLabel: 'Bachelor of Science' },
+            { valueAndLabel: 'High School / Higher Secondary' },
             { valueAndLabel: 'Bachelor of Arts' },
             { valueAndLabel: 'Post Graduation Programs' },
         ],
@@ -86,12 +80,5 @@ export const formData = [
         options: getNextNYears(5).map((el) => ({ valueAndLabel: el })),
         optionValue: (option: any): string => option.valueAndLabel,
         optionLabel: (option: any): string => `${option.valueAndLabel}`,
-    },
-    {
-        type: 'textArea',
-        label: 'I want to join Tinkerhub because..',
-        helperText:
-            'This answer will help us to understand you better and handle your application accordingly.',
-        name: 'Reason',
     },
 ];

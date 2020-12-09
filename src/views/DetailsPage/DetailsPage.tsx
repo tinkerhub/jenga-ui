@@ -1,7 +1,7 @@
 import { Button, Datepicker, Paper, Select, TextArea, TextField } from 'components';
 import { Transition } from '@headlessui/react';
 import { formData } from './formData';
-import { useDetailsPage } from './hooks';
+import { useDetailsPage } from './useDetailsPage';
 import { useRouter } from 'next/router';
 
 const DetailsPage = (): JSX.Element => {

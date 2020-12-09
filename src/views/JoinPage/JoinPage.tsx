@@ -12,7 +12,7 @@ const JoinPage = (): JSX.Element => {
                 enter="transition-opacity duration-1000 ease-in-out"
                 enterFrom="opacity-0"
                 enterTo="opacity-100"
-                leave="transition-opacity duration-150"
+                leave="transition-opacity duration-1000"
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
                 className="py-10 max-w-sm"

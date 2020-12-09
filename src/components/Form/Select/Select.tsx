@@ -12,7 +12,7 @@ type SelectProps = {
     placeholder?: string;
     label?: string;
     helperText?: string;
-    options: Array<Record<string, unknown>>;
+    options?: Array<Record<string, unknown>>;
     optionLabel: getOptionLabel | undefined;
     optionValue: getOptionValue | undefined;
 };
@@ -21,7 +21,7 @@ const Select: React.FC<SelectProps> = ({
     control,
     defaultValue = '',
     error,
-    options,
+    options = [],
     name,
     placeholder = 'select',
     helperText,
