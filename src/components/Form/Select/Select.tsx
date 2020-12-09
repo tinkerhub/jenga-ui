@@ -12,7 +12,8 @@ type SelectProps = {
     placeholder?: string;
     label?: string;
     helperText?: string;
-    options?: Array<Record<string, unknown>>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options?: Array<Record<string, any>>;
     optionLabel: getOptionLabel | undefined;
     optionValue: getOptionValue | undefined;
 };
