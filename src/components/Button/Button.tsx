@@ -12,7 +12,7 @@ export type ButtonProps = {
     onClick?: () => void;
     rounded?: boolean;
     type?: 'button' | 'submit' | 'reset';
-    variant?: 'contained';
+    variant?: 'contained' | 'outlined';
 };
 
 export type Ref = HTMLButtonElement;
@@ -39,8 +39,12 @@ const Button = React.forwardRef<Ref, ButtonProps>(
          */
         const buttonType = {
             contained: {
-                primary: `bg-primary`,
-                secondary: `bg-secondary`,
+                primary: `bg-primary border border-transparent`,
+                secondary: `bg-secondary border border-transparent`,
+            },
+            outlined: {
+                primary: `text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary`,
+                secondary: `text-secondary bg-transparent border border-solid border-secondary hover:bg-secondary hover:text-white active:bg-secondary`,
             },
         };
 
@@ -49,12 +53,12 @@ const Button = React.forwardRef<Ref, ButtonProps>(
                 type={type}
                 onClick={onClick}
                 className={clsx(
-                    className,
-                    'py-2 px-4 hover:shadow-md outline-none focus:outline-none mr-1 mb-1',
+                    'py-2 px-4 hover:shadow-md outline-none focus:outline-none mr-1 mb-1 text-xs transition duration-150 ease-in-out',
                     buttonType[variant][color],
                     fullWidth && 'w-full',
-                    disabled && 'bg-opacity-25',
-                    rounded && 'rounded'
+                    disabled && 'bg-opacity-25 cursor-not-allowed',
+                    rounded && 'rounded',
+                    className
                 )}
                 ref={ref}
                 disabled={disabled}

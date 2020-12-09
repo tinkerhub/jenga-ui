@@ -31,18 +31,18 @@ export const RoundedButton = (): JSX.Element => {
     );
 };
 
-const onAsyncClick = (): Promise<void> =>
-    new Promise((resolve) => {
-        setTimeout(() => {
-            console.log('hgello');
-            resolve();
-        }, 2000);
-    });
-
 export const Loading = (): JSX.Element => {
     return (
-        <Button variant="contained" onClick={onAsyncClick}>
+        <Button variant="contained" loading={true}>
             <span className="text-mont text-white font-medium">Get Started</span>
+        </Button>
+    );
+};
+
+export const Outlined = (): JSX.Element => {
+    return (
+        <Button variant="outlined">
+            <span className="text-mont font-medium">Get Started</span>
         </Button>
     );
 };
