@@ -37,7 +37,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 router.replace('/');
             }
         };
-        checkUserSession();
+        // checkUserSession();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -65,7 +65,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             token: user?.token,
             setSessionData,
             removeSessionData,
-            loading,
+            loading: false,
         }),
 
         [user?.memberShipID, user?.number, loading, user?.verified, user?.token]

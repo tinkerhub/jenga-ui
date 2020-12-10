@@ -7,14 +7,21 @@ import { useFetch } from 'hooks/useFetch';
 import { getCollegeListAPI, GetCollegeListReturn } from 'api';
 import { Select, TextField } from 'components';
 
-const WizardStepTwo: React.FC = () => {
+export const WizardStepTwo: React.FC = () => {
     const { register, control, watch } = useFormContext();
     const { collegeList } = wizardStepTwoFormFields;
 
-    const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '') === 'Student';
+    const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '');
+    const isStudent = watchIsStudent?.valueAndLabel === 'Student';
+    const isMentor = watchIsStudent?.valueAndLabel === 'Professional';
+
+    const watchHasCampusCommunity = watch(
+        wizardStepTwoFormFields.heardAboutCampusCommunity.name,
+        ''
+    );
+
     const hasCampusCommunity =
-        watch(wizardStepTwoFormFields.heardAboutCampusCommunity.name, '') ===
-        'Yes, there is an active community';
+        watchHasCampusCommunity?.label === 'Yes, there is an active community';
 
     const { data: collegeFetchedList } = useFetch<GetCollegeListReturn[]>(
         [getCollegeListAPI.url],
@@ -24,7 +31,7 @@ const WizardStepTwo: React.FC = () => {
     return (
         <>
             {renderFormData(wizardStepTwoFormFields.isStudent, 'student', register, control)}
-            {watchIsStudent ? (
+            {isStudent ? (
                 <>
                     {renderFormData(
                         wizardStepTwoFormFields.heardAboutCampusCommunity,
@@ -45,6 +52,7 @@ const WizardStepTwo: React.FC = () => {
                         <TextField
                             name="FreshCollege"
                             ref={register}
+                            fullWidth
                             label="I currently study at"
                             helperText="Preferred format: College Name, Place, District"
                         />
@@ -53,11 +61,10 @@ const WizardStepTwo: React.FC = () => {
                         renderFormData(el, key, register, control)
                     )}
                 </>
-            ) : (
-                renderFormData(wizardStepTwoFormFields.canBeMentor, 'mentor', register, control)
-            )}
+            ) : null}
+            {isMentor
+                ? renderFormData(wizardStepTwoFormFields.canBeMentor, 'mentor', register, control)
+                : null}
         </>
     );
 };
-
-export default WizardStepTwo;

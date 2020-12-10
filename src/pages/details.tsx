@@ -5,7 +5,7 @@ import DetailsPage from 'views/DetailsPage';
 
 const JoinPage = (): JSX.Element => {
     return (
-        <div className="w-full h-full bg-background overflow-x-hidden">
+        <div className="w-full h-full bg-background overflow-y-auto">
             <Head>
                 <title>Welcome To TinkerHub</title>
                 <link rel="icon" href="/favicon.ico" />

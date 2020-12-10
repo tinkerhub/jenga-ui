@@ -54,6 +54,7 @@ const Select: React.FC<SelectProps> = ({
                 getOptionValue={optionValue}
                 getOptionLabel={optionLabel}
                 isMulti={isMulti}
+                instanceId={label}
             />
         </FormFieldWrapper>
     );

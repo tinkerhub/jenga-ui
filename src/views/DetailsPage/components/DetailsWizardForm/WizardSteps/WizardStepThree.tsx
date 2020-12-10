@@ -7,9 +7,13 @@ import { renderFormData } from 'components/utils';
 import { GetSkillsListReturn, getSkillsListAPI } from 'api';
 import { useFetch } from 'hooks/useFetch';
 
-const WizardStepOne: React.FC = () => {
+export const WizardStepThree: React.FC = () => {
     const { register, control, watch } = useFormContext();
-    const isMentor = watch(wizardStepTwoFormFields.canBeMentor.name, '');
+
+    const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '');
+    const watchCanMentor = watch(wizardStepTwoFormFields.canBeMentor.name, '');
+    const isPro = watchIsStudent?.valueAndLabel === 'Professional';
+    const isMentor = watchCanMentor?.label;
 
     const { data: skillFetchedList } = useFetch<GetSkillsListReturn[]>(
         [getSkillsListAPI.url],
@@ -27,7 +31,8 @@ const WizardStepOne: React.FC = () => {
                 options={skillFetchedList}
                 optionLabel={skills.optionLabel}
                 optionValue={skills.optionValue}
-                helperText={skills.helperText(isMentor)}
+                helperText={skills.helperText(isMentor && isPro)}
+                isMulti
             />
             {address.map((el, index) => renderFormData(el, index, register, control))}
             <div className="mb-4">
@@ -43,5 +48,3 @@ const WizardStepOne: React.FC = () => {
         </>
     );
 };
-
-export default WizardStepOne;

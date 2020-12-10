@@ -44,6 +44,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({
                                 variant="outlined"
                                 onClick={previousFormStep}
                                 disabled={isFirstStep}
+                                rounded
                             >
                                 Go Back
                             </Button>
@@ -53,8 +54,9 @@ export const WizardForm: React.FC<WizardFormProps> = ({
                                 color="primary"
                                 onClick={nextFormStep}
                                 className={isLastStep ? 'hidden' : 'block'}
+                                rounded
                             >
-                                Next
+                                <span className="text-white">Next</span>
                             </Button>
                         </div>
                         <div>
@@ -63,8 +65,9 @@ export const WizardForm: React.FC<WizardFormProps> = ({
                                 onClick={nextFormStep}
                                 className={!isLastStep ? 'hidden' : 'block'}
                                 type="submit"
+                                rounded
                             >
-                                Submit
+                                <span className="text-white">Submit</span>
                             </Button>
                         </div>
                     </div>

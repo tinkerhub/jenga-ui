@@ -4,7 +4,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { wizardStepOneFormFields } from './formFields';
 
-const WizardStepOne: React.FC = () => {
+export const WizardStepOne: React.FC = () => {
     const { register, control } = useFormContext();
     return (
         <>
@@ -14,5 +14,3 @@ const WizardStepOne: React.FC = () => {
         </>
     );
 };
-
-export default WizardStepOne;
