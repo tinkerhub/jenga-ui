@@ -6,6 +6,7 @@ type FormFields = {
     type: string;
     label: string;
     helperText?: string;
+    placeholder?: string;
     disabled?: boolean;
     name: string;
     options?: Record<string, unknown>[];
@@ -14,7 +15,17 @@ type FormFields = {
 };
 
 export const renderFormData = (
-    { type, name, disabled, label, helperText, options, optionLabel, optionValue }: FormFields,
+    {
+        type,
+        name,
+        disabled,
+        label,
+        helperText,
+        options,
+        optionLabel,
+        optionValue,
+        placeholder,
+    }: FormFields,
     key: string | number,
     register?: UseFormMethods['register'],
     control?: UseFormMethods['control']
@@ -31,6 +42,7 @@ export const renderFormData = (
                     disabled={disabled}
                     ref={register}
                     key={key}
+                    placeholder={placeholder}
                 />
             );
         case 'textArea':
@@ -43,6 +55,7 @@ export const renderFormData = (
                     fullWidth
                     ref={register}
                     key={key}
+                    placeholder={placeholder}
                 />
             );
         case 'date':
@@ -55,6 +68,7 @@ export const renderFormData = (
                     fullWidth
                     control={control}
                     key={key}
+                    placeholder={placeholder}
                 />
             );
         case 'select':
@@ -67,6 +81,7 @@ export const renderFormData = (
                     optionValue={optionValue}
                     control={control}
                     key={key}
+                    placeholder={placeholder}
                 />
             );
         default:

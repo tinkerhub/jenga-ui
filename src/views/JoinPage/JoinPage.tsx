@@ -6,7 +6,7 @@ const JoinPage = (): JSX.Element => {
 
     return (
         <div className="w-full h-full flex justify-center ">
-            <FadeIn className="py-10 max-w-sm">
+            <FadeIn className="py-10 max-w-sm" delay={0} attributes={{ immediateRender: true }}>
                 <div className="px-4 mb-12">
                     <h1 className="font-semibold">
                         Welcome to <br /> TinkerHub

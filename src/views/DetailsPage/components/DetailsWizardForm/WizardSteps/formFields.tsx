@@ -20,6 +20,7 @@ export const wizardStepOneFormFields = [
         type: 'date',
         label: 'I was born on',
         name: 'DOB',
+        placeholder: 'DD-MM-YYYY',
         defaultValue: '',
     },
     {
