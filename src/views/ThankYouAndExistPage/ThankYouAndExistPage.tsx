@@ -18,7 +18,7 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
     }
 
     return (
-        <div className="w-full h-full flex justify-center ">
+        <div className="w-full h-full flex justify-center">
             <FadeIn className="py-10 max-w-sm">
                 <div className="px-4 mb-12">
                     {header}
@@ -39,15 +39,15 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                         </Button>
                     </form>
                 </Paper>
-                <div className="absolute bottom-4 right-4 hidden md:block">
-                    <iframe
-                        src="https://tinkerhub.substack.com/embed"
-                        style={{ border: '1px solid #EEE', background: 'white' }}
-                        scrolling="no"
-                        title="TinkerHub Newsletter"
-                    ></iframe>
-                </div>
             </FadeIn>
+            <div className="absolute bottom-4 right-4 hidden md:block">
+                <iframe
+                    src="https://tinkerhub.substack.com/embed"
+                    style={{ border: '1px solid #EEE', background: 'white' }}
+                    scrolling="no"
+                    title="TinkerHub Newsletter"
+                ></iframe>
+            </div>
         </div>
     );
 };

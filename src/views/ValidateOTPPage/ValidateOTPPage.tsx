@@ -6,7 +6,7 @@ const ValidateOTPPage = (): JSX.Element => {
     const { register, errors, handleSubmit, validateOTPError, isSubmitting } = useValidateOTP();
 
     return (
-        <div className="w-full h-full flex justify-center ">
+        <div className="w-full h-full flex justify-center overflow-y-auto">
             <FadeIn className="py-10 max-w-sm">
                 <div className="px-4 mb-12">
                     <h1 className="font-semibold">
