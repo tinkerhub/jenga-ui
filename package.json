@@ -18,7 +18,6 @@
         "build-storybook": "build-storybook"
     },
     "dependencies": {
-        "@headlessui/react": "^0.2.0",
         "@types/nprogress": "^0.2.0",
         "axios": "^0.21.0",
         "clsx": "^1.1.1",
