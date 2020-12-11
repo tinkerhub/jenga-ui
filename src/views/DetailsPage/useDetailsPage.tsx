@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { getCollegeListAPI, userRegisterDetailsAPI, GetCollegeListReturn } from 'api';
-import { useForm, UseFormMethods } from 'react-hook-form';
+import { userRegisterDetailsAPI, GetCollegeListReturn, GetSkillsListReturn } from 'api';
 import { useAuth } from 'context/AuthContext';
-import { useFetch } from 'hooks/useFetch';
-
 interface OptionType1 {
     valueAndLabel: string;
 }
@@ -16,66 +13,73 @@ interface OptionType2 {
 interface submitRegistrationDetails {
     MobileNumber: string;
     FullName: string;
-    NickName: string;
     DOB: Date;
     Email: string;
-    Pronoun: OptionType1;
-    CampusCommunityActive: OptionType2;
-    College: GetCollegeListReturn;
-    StudyStream: OptionType1;
-    GraduationDate: OptionType1;
-    Reason: string;
-    accept: boolean;
+    Pronoun?: OptionType1;
+    CampusCommunityActive?: OptionType2;
+    College?: GetCollegeListReturn;
+    StudyStream?: OptionType1;
+    GraduationDate?: OptionType1;
+    accept?: boolean;
+    My_Skills?: GetSkillsListReturn[];
+    House_Name?: string;
+    Street?: string;
+    District?: OptionType1;
+    Pincode?: string;
+    Mentor?: OptionType2;
+    RegistrationType: OptionType1;
+    FreshCollege?: string;
 }
 
 type submitRegistrationDetailsSubmission = (arg: submitRegistrationDetails) => Promise<void>;
 
 type useDetailsPageReturn = {
     userRegisterError: string | null;
-    handleSubmit: HTMLFormElement['submit'];
-    register: UseFormMethods['register'];
-    errors: UseFormMethods['errors'];
-    isSubmitting: boolean;
-    collegeList: GetCollegeListReturn[] | undefined;
-    control: UseFormMethods['control'];
+    submitRegistrationDetails: submitRegistrationDetailsSubmission;
     verified?: boolean;
+    number?: string;
 };
 
 export const useDetailsPage = (): useDetailsPageReturn => {
     const [userRegisterError, setuserRegisterError] = useState(null);
-    const router = useRouter();
-    const { setSessionData, number, verified } = useAuth();
-    const { data: collegeList } = useFetch<GetCollegeListReturn[]>(
-        [getCollegeListAPI.url],
-        getCollegeListAPI.fetcher
-    );
 
-    const {
-        register,
-        errors,
-        handleSubmit,
-        control,
-        formState: { isSubmitting },
-    } = useForm<submitRegistrationDetails>({
-        defaultValues: {
-            MobileNumber: number,
-        },
-    });
+    const router = useRouter();
+
+    const { setSessionData, number, verified } = useAuth();
 
     const submitRegistrationDetails: submitRegistrationDetailsSubmission = async (preFormData) => {
+        const {
+            Pronoun,
+            CampusCommunityActive,
+            College,
+            StudyStream,
+            GraduationDate,
+            DOB,
+            District,
+            Mentor,
+            RegistrationType,
+        } = preFormData;
         try {
+            /**
+             * Formating my_skills from array of objects -> comma seperated string of id
+             * eg [{id:'#1',name:"hello"},{id:'#2',name:"hellov2"}] -> '#1,#2'
+             */
+            const My_Skills = preFormData?.My_Skills?.map((el) => el.id).join(',');
+
             const formData = {
                 ...preFormData,
                 accept: undefined,
-                DOB: `${preFormData.DOB.getFullYear()}-${
-                    preFormData.DOB.getMonth() + 1
-                }-${preFormData.DOB.getDate()}`,
+                DOB: `${DOB.getFullYear()}-${DOB.getMonth() + 1}-${DOB.getDate()}`,
                 MobileNumber: number as string,
-                Pronoun: preFormData.Pronoun.valueAndLabel,
-                CampusCommunityActive: preFormData.CampusCommunityActive.value,
-                College: preFormData.College.id,
-                StudyStream: preFormData.StudyStream.valueAndLabel,
-                GraduationDate: preFormData.GraduationDate.valueAndLabel,
+                Pronoun: Pronoun?.valueAndLabel,
+                CampusCommunityActive: CampusCommunityActive?.value,
+                College: College?.id,
+                StudyStream: StudyStream?.valueAndLabel,
+                GraduationDate: GraduationDate?.valueAndLabel,
+                District: District?.valueAndLabel,
+                Mentor: Boolean(Mentor?.value),
+                RegistrationType: RegistrationType?.valueAndLabel,
+                My_Skills,
             };
             const { memberShipID, token } = await userRegisterDetailsAPI(formData);
 
@@ -88,12 +92,8 @@ export const useDetailsPage = (): useDetailsPageReturn => {
 
     return {
         userRegisterError,
-        handleSubmit: handleSubmit(submitRegistrationDetails),
-        errors,
-        register,
-        isSubmitting,
-        collegeList,
-        control,
+        submitRegistrationDetails,
         verified,
+        number,
     };
 };

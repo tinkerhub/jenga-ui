@@ -9,15 +9,21 @@ interface RegisterMemberDetailsReturn {
 export interface RegisterMemberDetailsArgument {
     MobileNumber: string;
     FullName: string;
-    NickName: string;
     DOB: string;
     Email: string;
-    Pronoun: string;
-    CampusCommunityActive: string;
-    College: string;
-    StudyStream: string;
-    GraduationDate: string;
-    Reason: string;
+    Pronoun?: string;
+    CampusCommunityActive?: string;
+    FreshCollege?: string;
+    College?: string;
+    StudyStream?: string;
+    GraduationDate?: string;
+    My_Skills?: string;
+    House_Name?: string;
+    Street?: string;
+    District?: string;
+    Pincode?: string;
+    Mentor?: boolean;
+    RegistrationType: string;
 }
 
 const userRegisterDetailsAPI = async (

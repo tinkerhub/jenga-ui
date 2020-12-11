@@ -1,26 +1,38 @@
 import React from 'react';
-import { FormProvider } from 'react-hook-form';
+import { DefaultValues, FieldValues, FormProvider, SubmitHandler } from 'react-hook-form';
 import { useWizardForm } from './useWizardForm';
 import { Button } from 'components/Button';
 import clsx from 'clsx';
 
-type WizardFormProps = {
-    intialValues?: Record<string, unknown>;
-    onSubmit: () => void;
+type WizardFormProps<T, G> = {
+    children: React.ReactNode;
+    onSubmit: SubmitHandler<T>;
+    intialValues?: DefaultValues<G>;
     buttonAlign?: 'left' | 'center' | 'right';
 };
 
-export const WizardForm: React.FC<WizardFormProps> = ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const WizardForm = <
+    FormFieldType extends FieldValues,
+    FormInitialValue extends FormFieldType
+>({
     children,
     intialValues,
     onSubmit,
     buttonAlign = 'right',
-}) => {
+}: WizardFormProps<FormFieldType, FormInitialValue>): JSX.Element => {
     const wizardAllSteps = React.Children.toArray(children);
     const totalSteps = wizardAllSteps.length;
-    const { stepNumber, nextFormStep, previousFormStep, hookFormMethods } = useWizardForm({
+    const {
+        stepNumber,
+        nextFormStep,
+        previousFormStep,
+        hookFormMethods,
+        onWizardSubmit,
+    } = useWizardForm<FormFieldType>({
         totalSteps,
         intialValues,
+        onSubmit,
     });
     const isLastStep = stepNumber === totalSteps - 1;
     const isFirstStep = stepNumber === 0;
@@ -34,7 +46,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({
 
     return (
         <FormProvider {...hookFormMethods}>
-            <form onSubmit={hookFormMethods.handleSubmit(onSubmit)} className="h-full">
+            <form onSubmit={onWizardSubmit} className="h-full">
                 <div className="h-full flex flex-col">
                     {wizardStep}
                     <div className={clsx('flex items-center', buttonAlignment[buttonAlign])}>
@@ -65,6 +77,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({
                                 onClick={nextFormStep}
                                 className={!isLastStep ? 'hidden' : 'block'}
                                 type="submit"
+                                loading={hookFormMethods.formState.isSubmitting}
                                 rounded
                             >
                                 <span className="text-white">Submit</span>

@@ -1,6 +1,7 @@
 import { FadeIn, Paper, WizardForm, WizardStep } from 'components';
 import { useDetailsPage } from './useDetailsPage';
 import { useRouter } from 'next/router';
+
 import {
     WizardStepOne,
     WizardStepTwo,
@@ -8,20 +9,13 @@ import {
 } from './components/DetailsWizardForm/WizardSteps';
 
 const DetailsPage = (): JSX.Element => {
-    const {
-        handleSubmit,
-        register,
-        isSubmitting,
-        collegeList,
-        control,
-        verified,
-    } = useDetailsPage();
+    const { verified, submitRegistrationDetails, number } = useDetailsPage();
     const router = useRouter();
 
-    // if (!verified) {
-    //     router.push('/');
-    //     return <div />;
-    // }
+    if (!verified) {
+        router.push('/');
+        return <div />;
+    }
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -37,9 +31,8 @@ const DetailsPage = (): JSX.Element => {
                 </div>
                 <Paper rounded>
                     <WizardForm
-                        onSubmit={() => {
-                            console.log('submitted');
-                        }}
+                        onSubmit={submitRegistrationDetails}
+                        intialValues={{ MobileNumber: number }}
                     >
                         <WizardStep>
                             <FadeIn duration={0.5} delay={0}>

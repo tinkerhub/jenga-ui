@@ -13,7 +13,7 @@ export const WizardStepThree: React.FC = () => {
     const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '');
     const watchCanMentor = watch(wizardStepTwoFormFields.canBeMentor.name, '');
     const isPro = watchIsStudent?.valueAndLabel === 'Professional';
-    const isMentor = watchCanMentor?.label;
+    const isMentor = watchCanMentor?.value;
 
     const { data: skillFetchedList } = useFetch<GetSkillsListReturn[]>(
         [getSkillsListAPI.url],
