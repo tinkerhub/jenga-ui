@@ -1,5 +1,4 @@
-import { Button, Paper, TextField } from 'components';
-import { Transition } from '@headlessui/react';
+import { Button, FadeIn, Paper, TextField } from 'components';
 import { useJoinPage } from './hooks';
 
 const JoinPage = (): JSX.Element => {
@@ -7,16 +6,7 @@ const JoinPage = (): JSX.Element => {
 
     return (
         <div className="w-full h-full flex justify-center ">
-            <Transition
-                show={true}
-                enter="transition-opacity duration-1000 ease-in-out"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-1000"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-                className="py-10 max-w-sm"
-            >
+            <FadeIn className="py-10 max-w-sm">
                 <div className="px-4 mb-12">
                     <h1 className="font-semibold">
                         Welcome to <br /> TinkerHub
@@ -57,7 +47,7 @@ const JoinPage = (): JSX.Element => {
                         </Button>
                     </form>
                 </Paper>
-            </Transition>
+            </FadeIn>
         </div>
     );
 };

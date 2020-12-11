@@ -1,15 +1,4 @@
-import {
-    Button,
-    Datepicker,
-    Paper,
-    Select,
-    TextArea,
-    TextField,
-    WizardForm,
-    WizardStep,
-} from 'components';
-import { Transition } from '@headlessui/react';
-import { formData } from './formData';
+import { FadeIn, Paper, WizardForm, WizardStep } from 'components';
 import { useDetailsPage } from './useDetailsPage';
 import { useRouter } from 'next/router';
 import {
@@ -36,16 +25,7 @@ const DetailsPage = (): JSX.Element => {
 
     return (
         <div className="w-full h-full flex justify-center ">
-            <Transition
-                show={true}
-                enter="transition-opacity duration-1000 ease-in-out"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-150"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-                className="py-10 max-w-sm"
-            >
+            <FadeIn className="py-10 max-w-sm">
                 <div className="px-4 mb-12">
                     <h1 className="font-semibold">
                         Welcome to <br /> TinkerHub
@@ -62,17 +42,23 @@ const DetailsPage = (): JSX.Element => {
                         }}
                     >
                         <WizardStep>
-                            <WizardStepOne />
+                            <FadeIn duration={0.5} delay={0}>
+                                <WizardStepOne />
+                            </FadeIn>
                         </WizardStep>
                         <WizardStep>
-                            <WizardStepTwo />
+                            <FadeIn duration={0.5} delay={0}>
+                                <WizardStepTwo />
+                            </FadeIn>
                         </WizardStep>
                         <WizardStep>
-                            <WizardStepThree />
+                            <FadeIn duration={0.5} delay={0}>
+                                <WizardStepThree />
+                            </FadeIn>
                         </WizardStep>
                     </WizardForm>
                 </Paper>
-            </Transition>
+            </FadeIn>
         </div>
     );
 };

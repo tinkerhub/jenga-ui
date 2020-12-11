@@ -36,7 +36,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({
         <FormProvider {...hookFormMethods}>
             <form onSubmit={hookFormMethods.handleSubmit(onSubmit)} className="h-full">
                 <div className="h-full flex flex-col">
-                    <div className="flex-grow">{wizardStep}</div>
+                    {wizardStep}
                     <div className={clsx('flex items-center', buttonAlignment[buttonAlign])}>
                         <div>
                             <Button
