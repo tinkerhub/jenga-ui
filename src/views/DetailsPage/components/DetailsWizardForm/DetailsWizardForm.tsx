@@ -6,12 +6,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { WizardStepOne, WizardStepTwo, WizardStepThree } from './WizardSteps';
 
+type Option = {
+    label: string;
+    value: string;
+};
+
 const PickAnOptionValidator = Yup.object().shape({
     label: Yup.string().required(),
     value: Yup.string().required(),
 });
 
-const requiredErrorStatement = (value: str): string => `Please type your ${value}`;
+const requiredErrorStatement = (value: string): string => `Please type your ${value}`;
 
 const registerFormValidator = Yup.object().shape({
     MobileNumber: Yup.string().required(),
@@ -22,26 +27,28 @@ const registerFormValidator = Yup.object().shape({
     CampusCommunityActive: Yup.object()
         .nullable()
         .when('RegistrationType', {
-            is: (val: any) => val?.value === 'Student',
+            is: (val: Option) => val?.value === 'Student',
             then: PickAnOptionValidator.nullable().required(
                 requiredErrorStatement('Please pick an option')
             ),
         }),
-    College: Yup.object().when('CampusCommunityActive', {
-        is: (val: any) => val?.value === 'Yes',
-        then: Yup.object()
-            .shape({
-                id: Yup.string().required(),
-                name: Yup.string().required(),
-            })
-            .required('Please pick a college'),
-    }),
-    StudyStream: PickAnOptionValidator.when('RegistrationType', {
-        is: (val: any) => val?.value === 'Student',
+    College: Yup.object()
+        .nullable()
+        .when('CampusCommunityActive', {
+            is: (val: Option) => val?.value === 'Yes',
+            then: Yup.object()
+                .shape({
+                    id: Yup.string().required(),
+                    name: Yup.string().required(),
+                })
+                .required('Please pick a college'),
+        }),
+    StudyStream: PickAnOptionValidator.nullable().when('RegistrationType', {
+        is: (val: Option) => val?.value === 'Student',
         then: PickAnOptionValidator.required(),
     }),
-    GraduationDate: PickAnOptionValidator.when('RegistrationType', {
-        is: (val: any) => val?.value === 'Student',
+    GraduationDate: PickAnOptionValidator.nullable().when('RegistrationType', {
+        is: (val: Option) => val?.value === 'Student',
         then: PickAnOptionValidator.required(),
     }),
     accept: Yup.boolean().required(),
@@ -61,14 +68,16 @@ const registerFormValidator = Yup.object().shape({
     Mentor: Yup.object()
         .nullable()
         .when('RegistrationType', {
-            is: (val: any) => val?.value === 'Professional',
+            is: (val: Option) => val?.value === 'Professional',
             then: PickAnOptionValidator.required(),
         }),
     RegistrationType: PickAnOptionValidator.nullable().required('Please pick an option'),
-    FreshCollege: Yup.string().when('CampusCommunityActive', {
-        is: (val: any) => val?.value === 'No',
-        then: Yup.string().required('Type your college name'),
-    }),
+    FreshCollege: Yup.string()
+        .nullable()
+        .when('CampusCommunityActive', {
+            is: (val: Option) => val?.value === 'No',
+            then: Yup.string().required('Type your college name'),
+        }),
 });
 
 type DetailsWizardFormProps<T, G> = {
@@ -85,9 +94,7 @@ const DetailsWizardForm = <
 }: DetailsWizardFormProps<RegisterFormFieldType, InitialFormFieldType>): JSX.Element => {
     return (
         <WizardForm
-            onSubmit={(el) => {
-                console.log(el);
-            }}
+            onSubmit={submitRegistrationDetails}
             intialValues={intialValues}
             resolver={yupResolver(registerFormValidator)}
         >

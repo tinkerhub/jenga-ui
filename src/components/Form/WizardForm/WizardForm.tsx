@@ -41,6 +41,10 @@ export const WizardForm = <
     const isFirstStep = stepNumber === 0;
     const wizardStep = wizardAllSteps[stepNumber];
 
+    const hasError =
+        Object.keys(hookFormMethods.errors).length !== 0 &&
+        hookFormMethods.errors.constructor === Object;
+
     const buttonAlignment = {
         left: 'justify-start',
         center: 'justify-center',
@@ -80,10 +84,11 @@ export const WizardForm = <
                                 onClick={nextFormStep}
                                 className={!isLastStep ? 'hidden' : 'block'}
                                 type="submit"
+                                disabled={hasError}
                                 loading={hookFormMethods.formState.isSubmitting}
                                 rounded
                             >
-                                <span className="text-white">Submit</span>
+                                <span className="text-white">{!hasError ? 'Submit' : 'Error'}</span>
                             </Button>
                         </div>
                     </div>

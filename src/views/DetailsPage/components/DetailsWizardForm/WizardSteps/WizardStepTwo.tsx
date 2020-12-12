@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { renderFormData } from 'components/utils';
 import { wizardStepTwoFormFields } from './formFields';
@@ -8,15 +8,16 @@ import { getCollegeListAPI, GetCollegeListReturn } from 'api';
 import { Select, TextField } from 'components';
 
 export const WizardStepTwo: React.FC = () => {
-    const { register, control, watch, errors } = useFormContext();
+    const { register, control, watch, errors, unregister, setValue } = useFormContext();
     const {
         collegeList,
         canBeMentor,
         studentDetails,
         heardAboutCampusCommunity,
+        isStudent: isStudentFormField,
     } = wizardStepTwoFormFields;
 
-    const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '');
+    const watchIsStudent = watch(isStudentFormField.name, '');
 
     const isStudent = watchIsStudent?.value === 'Student';
     const isMentor = watchIsStudent?.value === 'Professional';
@@ -31,6 +32,31 @@ export const WizardStepTwo: React.FC = () => {
         getCollegeListAPI.fetcher
     );
 
+    const studentConditionalRenderingList = [
+        canBeMentor.name,
+        !hasCampusCommunity ? collegeList.name : 'FreshCollege',
+    ];
+
+    const mentorConditionalRenderingList = [
+        collegeList.name,
+        'FreshCollege',
+        heardAboutCampusCommunity.name,
+        ...studentDetails.map((el) => el.name),
+    ];
+
+    // remove conditional other ones
+    useEffect(() => {
+        if (isStudent) {
+            unregister(studentConditionalRenderingList);
+            studentConditionalRenderingList.forEach((el) => setValue(el, null));
+        } else {
+            mentorConditionalRenderingList.forEach((el) => setValue(el, null));
+            unregister(mentorConditionalRenderingList);
+            [canBeMentor.name].forEach((el) => register(el));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isStudent, hasCampusCommunity, unregister]);
+
     return (
         <>
             {renderFormData(
@@ -38,7 +64,7 @@ export const WizardStepTwo: React.FC = () => {
                 'student',
                 register,
                 control,
-                errors?.[wizardStepTwoFormFields.isStudent.name]?.message
+                errors?.[isStudentFormField.name]?.message
             )}
             {isStudent ? (
                 <>

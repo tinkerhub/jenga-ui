@@ -8,10 +8,10 @@ const DetailsPage = (): JSX.Element => {
     const { verified, submitRegistrationDetails, number } = useDetailsPage();
     const router = useRouter();
 
-    // if (!verified) {
-    //     router.push('/');
-    //     return <div />;
-    // }
+    if (!verified) {
+        router.push('/');
+        return <div />;
+    }
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -28,7 +28,7 @@ const DetailsPage = (): JSX.Element => {
                 <Paper rounded>
                     <DetailsWizardForm
                         submitRegistrationDetails={submitRegistrationDetails}
-                        intialValues={{ MobileNumber: number }}
+                        intialValues={{ MobileNumber: number, DOB: '' }}
                     />
                 </Paper>
             </FadeIn>
