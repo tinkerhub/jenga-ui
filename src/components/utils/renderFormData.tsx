@@ -8,6 +8,7 @@ type FormFields = {
     helperText?: string;
     placeholder?: string;
     disabled?: boolean;
+    required?: boolean;
     name: string;
     options?: Record<string, unknown>[];
     optionValue?: (option: any) => string;
@@ -25,10 +26,12 @@ export const renderFormData = (
         optionLabel,
         optionValue,
         placeholder,
+        required,
     }: FormFields,
     key: string | number,
     register?: UseFormMethods['register'],
-    control?: UseFormMethods['control']
+    control?: UseFormMethods['control'],
+    error?: string
 ): JSX.Element => {
     switch (type) {
         case 'textfield':
@@ -36,13 +39,14 @@ export const renderFormData = (
                 <TextField
                     name={name}
                     label={label}
-                    helperText={helperText}
-                    required
+                    helperText={error || helperText}
+                    required={required}
                     fullWidth
                     disabled={disabled}
                     ref={register}
                     key={key}
                     placeholder={placeholder}
+                    error={Boolean(error)}
                 />
             );
         case 'textArea':
@@ -50,12 +54,13 @@ export const renderFormData = (
                 <TextArea
                     name={name}
                     label={label}
-                    helperText={helperText}
-                    required
+                    helperText={error || helperText}
+                    required={required}
                     fullWidth
                     ref={register}
                     key={key}
                     placeholder={placeholder}
+                    error={Boolean(error)}
                 />
             );
         case 'date':
@@ -63,12 +68,13 @@ export const renderFormData = (
                 <Datepicker
                     name={name}
                     label={label}
-                    helperText={helperText}
-                    required
+                    helperText={error || helperText}
+                    required={required}
                     fullWidth
                     control={control}
                     key={key}
                     placeholder={placeholder}
+                    error={Boolean(error)}
                 />
             );
         case 'select':
@@ -82,6 +88,8 @@ export const renderFormData = (
                     control={control}
                     key={key}
                     placeholder={placeholder}
+                    error={Boolean(error)}
+                    helperText={error || helperText}
                 />
             );
         default:

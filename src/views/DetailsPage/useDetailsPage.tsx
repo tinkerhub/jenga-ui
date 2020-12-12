@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { userRegisterDetailsAPI, GetCollegeListReturn, GetSkillsListReturn } from 'api';
 import { useAuth } from 'context/AuthContext';
-interface OptionType1 {
-    valueAndLabel: string;
-}
-interface OptionType2 {
+interface Options {
     value: string;
     label: string;
 }
@@ -15,19 +12,19 @@ interface submitRegistrationDetails {
     FullName: string;
     DOB: Date;
     Email: string;
-    Pronoun?: OptionType1;
-    CampusCommunityActive?: OptionType2;
+    Pronoun?: Options;
+    CampusCommunityActive?: Options;
     College?: GetCollegeListReturn;
-    StudyStream?: OptionType1;
-    GraduationDate?: OptionType1;
+    StudyStream?: Options;
+    GraduationDate?: Options;
     accept?: boolean;
     My_Skills?: GetSkillsListReturn[];
     House_Name?: string;
     Street?: string;
-    District?: OptionType1;
+    District?: Options;
     Pincode?: string;
-    Mentor?: OptionType2;
-    RegistrationType: OptionType1;
+    Mentor?: Options;
+    RegistrationType: Options;
     FreshCollege?: string;
 }
 
@@ -71,14 +68,14 @@ export const useDetailsPage = (): useDetailsPageReturn => {
                 accept: undefined,
                 DOB: `${DOB.getFullYear()}-${DOB.getMonth() + 1}-${DOB.getDate()}`,
                 MobileNumber: number as string,
-                Pronoun: Pronoun?.valueAndLabel,
+                Pronoun: Pronoun?.value,
                 CampusCommunityActive: CampusCommunityActive?.value,
                 College: College?.id,
-                StudyStream: StudyStream?.valueAndLabel,
-                GraduationDate: GraduationDate?.valueAndLabel,
-                District: District?.valueAndLabel,
+                StudyStream: StudyStream?.value,
+                GraduationDate: GraduationDate?.value,
+                District: District?.value,
                 Mentor: Boolean(Mentor?.value),
-                RegistrationType: RegistrationType?.valueAndLabel,
+                RegistrationType: RegistrationType?.value,
                 My_Skills,
             };
             const { memberShipID, token } = await userRegisterDetailsAPI(formData);

@@ -1,21 +1,17 @@
-import { FadeIn, Paper, WizardForm, WizardStep } from 'components';
+import { FadeIn, Paper } from 'components';
 import { useDetailsPage } from './useDetailsPage';
 import { useRouter } from 'next/router';
 
-import {
-    WizardStepOne,
-    WizardStepTwo,
-    WizardStepThree,
-} from './components/DetailsWizardForm/WizardSteps';
+import { DetailsWizardForm } from './components/DetailsWizardForm';
 
 const DetailsPage = (): JSX.Element => {
     const { verified, submitRegistrationDetails, number } = useDetailsPage();
     const router = useRouter();
 
-    if (!verified) {
-        router.push('/');
-        return <div />;
-    }
+    // if (!verified) {
+    //     router.push('/');
+    //     return <div />;
+    // }
 
     return (
         <div className="w-full h-full flex justify-center ">
@@ -30,26 +26,10 @@ const DetailsPage = (): JSX.Element => {
                     </p>
                 </div>
                 <Paper rounded>
-                    <WizardForm
-                        onSubmit={submitRegistrationDetails}
+                    <DetailsWizardForm
+                        submitRegistrationDetails={submitRegistrationDetails}
                         intialValues={{ MobileNumber: number }}
-                    >
-                        <WizardStep>
-                            <FadeIn duration={0.5} delay={0}>
-                                <WizardStepOne />
-                            </FadeIn>
-                        </WizardStep>
-                        <WizardStep>
-                            <FadeIn duration={0.5} delay={0}>
-                                <WizardStepTwo />
-                            </FadeIn>
-                        </WizardStep>
-                        <WizardStep>
-                            <FadeIn duration={0.5} delay={0}>
-                                <WizardStepThree />
-                            </FadeIn>
-                        </WizardStep>
-                    </WizardForm>
+                    />
                 </Paper>
             </FadeIn>
         </div>

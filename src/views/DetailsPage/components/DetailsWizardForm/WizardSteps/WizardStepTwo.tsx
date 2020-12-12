@@ -8,17 +8,20 @@ import { getCollegeListAPI, GetCollegeListReturn } from 'api';
 import { Select, TextField } from 'components';
 
 export const WizardStepTwo: React.FC = () => {
-    const { register, control, watch } = useFormContext();
-    const { collegeList } = wizardStepTwoFormFields;
+    const { register, control, watch, errors } = useFormContext();
+    const {
+        collegeList,
+        canBeMentor,
+        studentDetails,
+        heardAboutCampusCommunity,
+    } = wizardStepTwoFormFields;
 
     const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '');
-    const isStudent = watchIsStudent?.valueAndLabel === 'Student';
-    const isMentor = watchIsStudent?.valueAndLabel === 'Professional';
 
-    const watchHasCampusCommunity = watch(
-        wizardStepTwoFormFields.heardAboutCampusCommunity.name,
-        ''
-    );
+    const isStudent = watchIsStudent?.value === 'Student';
+    const isMentor = watchIsStudent?.value === 'Professional';
+
+    const watchHasCampusCommunity = watch(heardAboutCampusCommunity.name, '');
 
     const hasCampusCommunity =
         watchHasCampusCommunity?.label === 'Yes, there is an active community';
@@ -30,14 +33,21 @@ export const WizardStepTwo: React.FC = () => {
 
     return (
         <>
-            {renderFormData(wizardStepTwoFormFields.isStudent, 'student', register, control)}
+            {renderFormData(
+                wizardStepTwoFormFields.isStudent,
+                'student',
+                register,
+                control,
+                errors?.[wizardStepTwoFormFields.isStudent.name]?.message
+            )}
             {isStudent ? (
                 <>
                     {renderFormData(
-                        wizardStepTwoFormFields.heardAboutCampusCommunity,
+                        heardAboutCampusCommunity,
                         'campusCommunity',
                         register,
-                        control
+                        control,
+                        errors?.[heardAboutCampusCommunity.name]?.message
                     )}
                     {hasCampusCommunity ? (
                         <Select
@@ -47,6 +57,8 @@ export const WizardStepTwo: React.FC = () => {
                             options={collegeFetchedList}
                             optionLabel={collegeList.optionLabel}
                             optionValue={collegeList.optionValue}
+                            helperText={errors?.[collegeList.name]?.message}
+                            error={Boolean(errors?.[collegeList.name]?.message)}
                         />
                     ) : (
                         <TextField
@@ -54,16 +66,26 @@ export const WizardStepTwo: React.FC = () => {
                             ref={register}
                             fullWidth
                             label="I currently study at"
-                            helperText="Preferred format: College Name, Place, District"
+                            helperText={
+                                errors?.FreshCollege?.message ||
+                                'Preferred format: College Name, Place, District'
+                            }
+                            error={Boolean(errors?.FreshCollege?.message)}
                         />
                     )}
-                    {wizardStepTwoFormFields.studentDetails.map((el, key) =>
-                        renderFormData(el, key, register, control)
+                    {studentDetails.map((el, key) =>
+                        renderFormData(el, key, register, control, errors?.[el.name]?.message)
                     )}
                 </>
             ) : null}
             {isMentor
-                ? renderFormData(wizardStepTwoFormFields.canBeMentor, 'mentor', register, control)
+                ? renderFormData(
+                      canBeMentor,
+                      'mentor',
+                      register,
+                      control,
+                      errors?.[canBeMentor.name]?.message
+                  )
                 : null}
         </>
     );

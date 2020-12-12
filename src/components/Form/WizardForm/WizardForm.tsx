@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultValues, FieldValues, FormProvider, SubmitHandler } from 'react-hook-form';
+import { DefaultValues, FieldValues, FormProvider, SubmitHandler, Resolver } from 'react-hook-form';
 import { useWizardForm } from './useWizardForm';
 import { Button } from 'components/Button';
 import clsx from 'clsx';
@@ -8,6 +8,7 @@ type WizardFormProps<T, G> = {
     children: React.ReactNode;
     onSubmit: SubmitHandler<T>;
     intialValues?: DefaultValues<G>;
+    resolver?: Resolver<T>;
     buttonAlign?: 'left' | 'center' | 'right';
 };
 
@@ -20,6 +21,7 @@ export const WizardForm = <
     intialValues,
     onSubmit,
     buttonAlign = 'right',
+    resolver,
 }: WizardFormProps<FormFieldType, FormInitialValue>): JSX.Element => {
     const wizardAllSteps = React.Children.toArray(children);
     const totalSteps = wizardAllSteps.length;
@@ -33,6 +35,7 @@ export const WizardForm = <
         totalSteps,
         intialValues,
         onSubmit,
+        resolver,
     });
     const isLastStep = stepNumber === totalSteps - 1;
     const isFirstStep = stepNumber === 0;

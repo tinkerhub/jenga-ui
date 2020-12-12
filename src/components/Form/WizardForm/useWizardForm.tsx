@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
     DeepPartial,
     FieldValues,
+    Resolver,
     SubmitHandler,
     UnpackNestedValue,
     useForm,
@@ -12,6 +13,7 @@ type useWizardFormProps<T> = {
     totalSteps: number;
     intialValues?: UnpackNestedValue<DeepPartial<T>>;
     onSubmit: SubmitHandler<T>;
+    resolver?: Resolver<T>;
 };
 
 type useWizardFormReturn<T> = {
@@ -26,12 +28,15 @@ export const useWizardForm = <FormFieldType extends FieldValues>({
     totalSteps,
     intialValues,
     onSubmit,
+    resolver,
 }: useWizardFormProps<FormFieldType>): useWizardFormReturn<FormFieldType> => {
     const [stepNumber, setStepNumber] = useState(0);
 
     const hookFormMethods = useForm<FormFieldType>({
         shouldUnregister: false,
         defaultValues: intialValues,
+        resolver,
+        reValidateMode: 'onChange',
     });
 
     const nextFormStep = (): void => {

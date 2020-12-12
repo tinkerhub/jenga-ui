@@ -5,11 +5,11 @@ import { useFormContext } from 'react-hook-form';
 import { wizardStepOneFormFields } from './formFields';
 
 export const WizardStepOne: React.FC = () => {
-    const { register, control } = useFormContext();
+    const { register, control, errors } = useFormContext();
     return (
         <>
             {wizardStepOneFormFields.map((el, index) =>
-                renderFormData(el, index, register, control)
+                renderFormData(el, index, register, control, errors?.[el.name]?.message)
             )}
         </>
     );
