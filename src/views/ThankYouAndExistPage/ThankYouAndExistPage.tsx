@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, FadeIn, Paper } from 'components';
 import { useThankYouAndExist } from './hooks';
 import { useRouter } from 'next/router';
+import { Newsletter } from './components/Newsletter';
+import { useToggle } from 'hooks/useToggle';
+import { useTimeoutState } from 'hooks/useTimeoutState';
 
 type ThankYouAndExistPageProps = {
     header: JSX.Element;
@@ -10,12 +13,19 @@ type ThankYouAndExistPageProps = {
 
 const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, subBody }) => {
     const { memberID, copiedTextStatus, copyToClipboard, logout } = useThankYouAndExist();
+    const [isNewsletterOpen, toggleNewsLetterOpen] = useToggle(true);
+    const [newsLetterPop, setNewsLetterPop] = useTimeoutState(3000);
     const router = useRouter();
 
-    // if (!memberID) {
-    //     router.push('/');
-    //     return <div />;
-    // }
+    useEffect(() => {
+        setNewsLetterPop(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    if (!memberID) {
+        router.push('/');
+        return <div />;
+    }
 
     return (
         <div className="w-full h-full flex justify-center">
@@ -40,14 +50,10 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                     </form>
                 </Paper>
             </FadeIn>
-            <div className="absolute bottom-4 right-4 hidden md:block">
-                <iframe
-                    src="https://tinkerhub.substack.com/embed"
-                    style={{ border: '1px solid #EEE', background: 'white' }}
-                    scrolling="no"
-                    title="TinkerHub Newsletter"
-                ></iframe>
-            </div>
+            <Newsletter
+                isOpen={!newsLetterPop && isNewsletterOpen}
+                handleClose={() => toggleNewsLetterOpen(false)}
+            />
         </div>
     );
 };

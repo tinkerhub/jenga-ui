@@ -37,3 +37,6 @@ a {
 .react-datepicker__navigation--previous {
     border-right-color: black;
 }
+.embed-page-inner {
+    width: 100%;
+}

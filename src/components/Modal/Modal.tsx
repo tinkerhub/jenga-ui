@@ -5,17 +5,26 @@ interface ModalProps {
     isOpen: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ handleClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, handleClose, children }) => {
     return (
-        <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-            onClick={handleClose}
-            role="button"
-            onKeyDown={handleClose}
-            tabIndex={0}
-        >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">{children}</div>
-        </div>
+        <>
+            {isOpen ? (
+                <>
+                    <div
+                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none transition-all duration-100"
+                        onClick={handleClose}
+                        role="button"
+                        onKeyDown={handleClose}
+                        tabIndex={0}
+                    >
+                        <div className="relative w-full flex justify-center items-center m-2">
+                            {children}
+                        </div>
+                    </div>
+                    <div className="opacity-25 fixed inset-0 z-40 bg-black" />
+                </>
+            ) : null}
+        </>
     );
 };
 
