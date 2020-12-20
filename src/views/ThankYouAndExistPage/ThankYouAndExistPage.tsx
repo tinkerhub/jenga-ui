@@ -12,23 +12,23 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
     const { memberID, copiedTextStatus, copyToClipboard, logout } = useThankYouAndExist();
     const router = useRouter();
 
-    if (!memberID) {
-        router.push('/');
-        return <div />;
-    }
+    // if (!memberID) {
+    //     router.push('/');
+    //     return <div />;
+    // }
 
     return (
         <div className="w-full h-full flex justify-center">
             <FadeIn className="py-10 max-w-sm">
-                <div className="px-4 mb-12">
-                    {header}
-                    {subBody}
-                </div>
                 <Paper rounded>
                     <form>
+                        <div className="px-4 mb-4">
+                            {header}
+                            {subBody}
+                        </div>
                         <hr className="mb-4" />
-                        <p>YOUR MEMBERSHIP ID</p>
-                        <h1 className="select-all">{memberID}</h1>
+                        <p className="text-subtext text-center mb-4">YOUR MEMBERSHIP ID</p>
+                        <h3 className="select-all text-center">{memberID}</h3>
                         <Button fullWidth className="mt-4 mb-2" rounded onClick={copyToClipboard}>
                             <span className="text-white">
                                 {copiedTextStatus === 'copied' ? 'Copied' : 'Copy text'}

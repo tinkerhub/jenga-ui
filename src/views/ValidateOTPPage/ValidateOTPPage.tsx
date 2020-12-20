@@ -9,7 +9,7 @@ const ValidateOTPPage = (): JSX.Element => {
         <div className="w-full h-full flex justify-center">
             <FadeIn className="py-10 max-w-sm">
                 <div className="px-4 mb-12">
-                    <h1 className="font-semibold">
+                    <h1>
                         Welcome to <br /> TinkerHub
                     </h1>
                     <p className="text-subtext">

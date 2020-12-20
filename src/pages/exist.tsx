@@ -13,9 +13,9 @@ const Title = (
 );
 
 const subBody = (
-    <>
-        <h5>If you need any kind of assistance, please mail us at hello@tinkerhub.org</h5>
-    </>
+    <p className="text-subtext mb-5">
+        If you need any kind of assistance, <br /> please mail us at hello@tinkerhub.org
+    </p>
 );
 
 const UserExistPage = (): JSX.Element => {

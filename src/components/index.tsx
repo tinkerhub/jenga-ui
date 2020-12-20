@@ -2,6 +2,7 @@ export { Button } from './Button';
 export { Container } from './Container';
 export { Paper } from './Paper';
 export { Spinner } from './Spinner';
+export { Modal } from './Modal';
 export { Select } from './Form/Select';
 export { AsyncSelect } from './Form/AsyncSelect';
 export { Datepicker } from './Form/DatePicker';

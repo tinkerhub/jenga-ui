@@ -53,7 +53,7 @@ const Button = React.forwardRef<Ref, ButtonProps>(
                 type={type}
                 onClick={onClick}
                 className={clsx(
-                    'py-2 px-4 hover:shadow-md outline-none focus:outline-none mr-1 mb-1 text-xs transition duration-150 ease-in-out',
+                    'py-2 px-4 hover:shadow-md outline-none focus:outline-none mr-1 mb-1 text-sm font-medium transition duration-150 ease-in-out',
                     buttonType[variant][color],
                     fullWidth && 'w-full',
                     disabled && 'bg-opacity-25 cursor-not-allowed',

@@ -11,7 +11,7 @@ const subBody = (
             We will review your application and share our community discord link in next 24 hours.
             We can&apos;t wait to onboard you!
         </h5>
-        <p>
+        <p className="text-subtext mb-5">
             Here is your membership id. We use this id for identity verification. If you need any
             kind of assistance, please mail us at hello@tinkerhub.org
         </p>
