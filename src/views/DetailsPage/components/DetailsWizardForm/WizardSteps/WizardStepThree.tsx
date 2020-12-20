@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
 import { wizardStepThreeFormFields, wizardStepTwoFormFields } from './formFields';
 import { Select, TextField } from 'components';
 import { renderFormData } from 'components/utils';
 import { GetSkillsListReturn, getSkillsListAPI } from 'api';
 import { useFetch } from 'hooks/useFetch';
+import { useWizard } from 'components/Form/WizardForm/WizardForm';
 
 export const WizardStepThree: React.FC = () => {
-    const { register, control, watch, errors } = useFormContext();
+    const { register, control, watch, errors } = useWizard();
 
     const watchIsStudent = watch(wizardStepTwoFormFields.isStudent.name, '');
     const watchCanMentor = watch(wizardStepTwoFormFields.canBeMentor.name, '');

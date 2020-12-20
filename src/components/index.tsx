@@ -7,5 +7,5 @@ export { AsyncSelect } from './Form/AsyncSelect';
 export { Datepicker } from './Form/DatePicker';
 export { TextField } from './Form/TextField';
 export { TextArea } from './Form/TextArea';
-export { WizardForm, WizardStep } from './Form/WizardForm';
+export { WizardForm, WizardStep, useWizard } from './Form/WizardForm';
 export { FadeIn } from './Animations';

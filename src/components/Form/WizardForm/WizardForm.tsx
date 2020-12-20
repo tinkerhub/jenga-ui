@@ -1,13 +1,22 @@
-import React from 'react';
-import { DefaultValues, FieldValues, FormProvider, SubmitHandler, Resolver } from 'react-hook-form';
-import { useWizardForm } from './useWizardForm';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import {
+    DefaultValues,
+    FieldValues,
+    SubmitHandler,
+    Resolver,
+    UseFormMethods,
+    useForm,
+    UnpackNestedValue,
+} from 'react-hook-form';
 import { Button } from 'components/Button';
 import clsx from 'clsx';
+
+const WizardContext = createContext({});
 
 type WizardFormProps<T, G> = {
     children: React.ReactNode;
     onSubmit: SubmitHandler<T>;
-    intialValues?: DefaultValues<G>;
+    initialValues?: DefaultValues<G>;
     resolver?: Resolver<T>;
     buttonAlign?: 'left' | 'center' | 'right';
 };
@@ -18,32 +27,39 @@ export const WizardForm = <
     FormInitialValue extends FormFieldType
 >({
     children,
-    intialValues,
+    initialValues,
     onSubmit,
     buttonAlign = 'right',
-    resolver,
 }: WizardFormProps<FormFieldType, FormInitialValue>): JSX.Element => {
     const wizardAllSteps = React.Children.toArray(children);
+    const [snapShot, setSnapShot] = useState<Partial<FormFieldType>>({});
     const totalSteps = wizardAllSteps.length;
-    const {
-        stepNumber,
-        nextFormStep,
-        previousFormStep,
-        hookFormMethods,
-        onWizardSubmit,
-    } = useWizardForm<FormFieldType>({
-        totalSteps,
-        intialValues,
-        onSubmit,
-        resolver,
-    });
+    const [stepNumber, setStepNumber] = useState(0);
     const isLastStep = stepNumber === totalSteps - 1;
     const isFirstStep = stepNumber === 0;
-    const wizardStep = wizardAllSteps[stepNumber];
+    const wizardStep = wizardAllSteps[stepNumber] as React.ReactElement;
 
-    const hasError =
-        Object.keys(hookFormMethods.errors).length !== 0 &&
-        hookFormMethods.errors.constructor === Object;
+    const hookFormMethods = useForm<FormFieldType>({
+        defaultValues: initialValues,
+        resolver: wizardStep.props.validation,
+    });
+
+    useEffect(() => {
+        if (stepNumber in snapShot) {
+            hookFormMethods.reset(snapShot[stepNumber]);
+        } else {
+            hookFormMethods.reset(initialValues);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stepNumber]);
+
+    const nextFormStep = (): void => {
+        setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
+    };
+
+    const previousFormStep = (): void => {
+        setStepNumber(Math.max(stepNumber - 1, 0));
+    };
 
     const buttonAlignment = {
         left: 'justify-start',
@@ -51,53 +67,68 @@ export const WizardForm = <
         right: 'justify-end',
     };
 
+    const onFormSubmit: SubmitHandler<FormFieldType> = async (
+        data: UnpackNestedValue<FormFieldType>
+    ) => {
+        if (wizardStep.props.onSubmit) {
+            await wizardStep.props.onSubmit(data);
+        }
+        setSnapShot((state) => ({ ...state, [stepNumber]: data }));
+        if (isLastStep) {
+            let req = {} as UnpackNestedValue<FormFieldType>;
+            for (let snap = 0; snap < totalSteps; snap++) {
+                req = { ...req, ...snapShot[snap] };
+            }
+            return onSubmit(req);
+        } else {
+            nextFormStep();
+        }
+    };
+
     return (
-        <FormProvider {...hookFormMethods}>
-            <form onSubmit={onWizardSubmit} className="h-full">
-                <div className="h-full flex flex-col">
+        <form onSubmit={hookFormMethods.handleSubmit(onFormSubmit)} className="h-full">
+            <div className="h-full flex flex-col">
+                <WizardContext.Provider value={{ ...hookFormMethods }}>
                     {wizardStep}
-                    <div className={clsx('flex items-center', buttonAlignment[buttonAlign])}>
-                        <div>
-                            <Button
-                                color="primary"
-                                variant="outlined"
-                                onClick={previousFormStep}
-                                disabled={isFirstStep}
-                                rounded
-                            >
-                                Go Back
-                            </Button>
-                        </div>
-                        <div>
-                            <Button
-                                color="primary"
-                                onClick={nextFormStep}
-                                className={isLastStep ? 'hidden' : 'block'}
-                                rounded
-                            >
-                                <span className="text-white">Next</span>
-                            </Button>
-                        </div>
-                        <div>
-                            <Button
-                                color="primary"
-                                onClick={nextFormStep}
-                                className={!isLastStep ? 'hidden' : 'block'}
-                                type="submit"
-                                disabled={hasError}
-                                loading={hookFormMethods.formState.isSubmitting}
-                                rounded
-                            >
-                                <span className="text-white">{!hasError ? 'Submit' : 'Error'}</span>
-                            </Button>
-                        </div>
+                </WizardContext.Provider>
+                <div className={clsx('flex items-center', buttonAlignment[buttonAlign])}>
+                    <div>
+                        <Button
+                            color="primary"
+                            variant="outlined"
+                            onClick={previousFormStep}
+                            disabled={isFirstStep}
+                            rounded
+                        >
+                            Go Back
+                        </Button>
+                    </div>
+                    <div>
+                        <Button
+                            color="primary"
+                            type="submit"
+                            loading={hookFormMethods.formState.isSubmitting}
+                            rounded
+                        >
+                            <span className="text-white">{isLastStep ? 'Submit' : 'Next'}</span>
+                        </Button>
                     </div>
                 </div>
-            </form>
-        </FormProvider>
+            </div>
+        </form>
     );
 };
 
-export const WizardStep: React.FC = ({ children }) => <>{children}</>;
+type WizardStepProps<T> = {
+    children: React.ReactNode;
+    onSubmit?: () => Promise<void>;
+    validation?: Resolver<T>;
+};
+
+export const WizardStep = <T extends FieldValues>({
+    children,
+}: WizardStepProps<T>): JSX.Element => <>{children}</>;
+
+export const useWizard = (): UseFormMethods => useContext(WizardContext) as UseFormMethods;
 
 export default WizardForm;

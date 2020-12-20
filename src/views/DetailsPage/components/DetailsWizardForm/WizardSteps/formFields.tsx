@@ -7,8 +7,8 @@ export const wizardStepOneFormFields = [
         type: 'textfield',
         label: 'Mobile Number',
         helperText: 'Please enter your 10 digit mobile number',
-        disabled: true,
         name: 'MobileNumber',
+        disabled: true,
     },
     {
         type: 'textfield',
@@ -103,7 +103,7 @@ export const wizardStepTwoFormFields = {
                 { value: 'Bachelor of Arts', label: 'Bachelor of Arts' },
                 {
                     value: 'Post Graduation Programs',
-                    label: 'Post Graduation Programs,label',
+                    label: 'Post Graduation Programs',
                 },
             ],
             optionValue: (option: any): string => option.value,

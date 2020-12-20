@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React from 'react';
 import { renderFormData } from 'components/utils';
 import { wizardStepTwoFormFields } from './formFields';
 import { useFetch } from 'hooks/useFetch';
 import { getCollegeListAPI, GetCollegeListReturn } from 'api';
 import { Select, TextField } from 'components';
+import { useWizard } from 'components/Form/WizardForm/WizardForm';
 
 export const WizardStepTwo: React.FC = () => {
-    const { register, control, watch, errors, unregister, setValue } = useFormContext();
+    const { register, control, watch, errors } = useWizard();
     const {
         collegeList,
         canBeMentor,
@@ -31,31 +31,6 @@ export const WizardStepTwo: React.FC = () => {
         [getCollegeListAPI.url],
         getCollegeListAPI.fetcher
     );
-
-    const studentConditionalRenderingList = [
-        canBeMentor.name,
-        !hasCampusCommunity ? collegeList.name : 'FreshCollege',
-    ];
-
-    const mentorConditionalRenderingList = [
-        collegeList.name,
-        'FreshCollege',
-        heardAboutCampusCommunity.name,
-        ...studentDetails.map((el) => el.name),
-    ];
-
-    // remove conditional other ones
-    useEffect(() => {
-        if (isStudent) {
-            unregister(studentConditionalRenderingList);
-            studentConditionalRenderingList.forEach((el) => setValue(el, null));
-        } else {
-            mentorConditionalRenderingList.forEach((el) => setValue(el, null));
-            unregister(mentorConditionalRenderingList);
-            [canBeMentor.name].forEach((el) => register(el));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isStudent, hasCampusCommunity, unregister]);
 
     return (
         <>

@@ -1,1 +1,1 @@
-export { WizardForm, WizardStep } from './WizardForm';
+export { WizardForm, WizardStep, useWizard } from './WizardForm';

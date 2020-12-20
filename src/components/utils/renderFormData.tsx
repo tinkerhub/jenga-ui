@@ -74,6 +74,7 @@ export const renderFormData = (
                     control={control}
                     key={key}
                     placeholder={placeholder}
+                    defaultValue=""
                     error={Boolean(error)}
                 />
             );
