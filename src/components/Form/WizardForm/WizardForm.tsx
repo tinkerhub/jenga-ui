@@ -53,6 +53,17 @@ export const WizardForm = <
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stepNumber]);
 
+    useEffect(() => {
+        if (isLastStep) {
+            let req = {} as UnpackNestedValue<FormFieldType>;
+            for (let snap = 0; snap < totalSteps; snap++) {
+                req = { ...req, ...snapShot[snap] };
+            }
+            return onSubmit(req);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [snapShot]);
+
     const nextFormStep = (): void => {
         setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
     };
@@ -74,15 +85,7 @@ export const WizardForm = <
             await wizardStep.props.onSubmit(data);
         }
         setSnapShot((state) => ({ ...state, [stepNumber]: data }));
-        if (isLastStep) {
-            let req = {} as UnpackNestedValue<FormFieldType>;
-            for (let snap = 0; snap < totalSteps; snap++) {
-                req = { ...req, ...snapShot[snap] };
-            }
-            return onSubmit(req);
-        } else {
-            nextFormStep();
-        }
+        if (!isLastStep) nextFormStep();
     };
 
     return (
