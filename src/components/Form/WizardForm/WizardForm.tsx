@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import {
     DefaultValues,
     FieldValues,
@@ -32,7 +32,7 @@ export const WizardForm = <
     buttonAlign = 'right',
 }: WizardFormProps<FormFieldType, FormInitialValue>): JSX.Element => {
     const wizardAllSteps = React.Children.toArray(children);
-    const [snapShot, setSnapShot] = useState<Partial<FormFieldType>>({});
+    const snapShot = useRef<Partial<FormFieldType>>({});
     const totalSteps = wizardAllSteps.length;
     const [stepNumber, setStepNumber] = useState(0);
     const isLastStep = stepNumber === totalSteps - 1;
@@ -46,23 +46,12 @@ export const WizardForm = <
 
     useEffect(() => {
         if (stepNumber in snapShot) {
-            hookFormMethods.reset(snapShot[stepNumber]);
+            hookFormMethods.reset(snapShot.current[stepNumber]);
         } else {
             hookFormMethods.reset(initialValues);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stepNumber]);
-
-    useEffect(() => {
-        if (isLastStep) {
-            let req = {} as UnpackNestedValue<FormFieldType>;
-            for (let snap = 0; snap < totalSteps; snap++) {
-                req = { ...req, ...snapShot[snap] };
-            }
-            return onSubmit(req);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [snapShot]);
 
     const nextFormStep = (): void => {
         setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
@@ -84,8 +73,16 @@ export const WizardForm = <
         if (wizardStep.props.onSubmit) {
             await wizardStep.props.onSubmit(data);
         }
-        setSnapShot((state) => ({ ...state, [stepNumber]: data }));
-        if (!isLastStep) nextFormStep();
+        snapShot.current = { ...snapShot.current, [stepNumber]: data };
+        if (!isLastStep) {
+            nextFormStep();
+        } else {
+            let req = {} as UnpackNestedValue<FormFieldType>;
+            for (let snap = 0; snap < totalSteps; snap++) {
+                req = { ...req, ...snapShot.current[snap] };
+            }
+            return onSubmit(req);
+        }
     };
 
     return (
