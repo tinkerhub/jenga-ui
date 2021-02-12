@@ -1,6 +1,6 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import BaseSelect, { OptionTypeBase, Styles } from 'react-select';
+import BaseSelect, { Styles } from 'react-select';
 import { getOptionLabel, getOptionValue } from 'react-select/src/builtins';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 
@@ -32,7 +32,7 @@ const Select: React.FC<SelectProps> = ({
     optionValue,
     isMulti = false,
 }) => {
-    const styles: Styles<OptionTypeBase, true> = {
+    const styles: Styles = {
         control: (provided) => ({
             ...provided,
             border: 'none',
