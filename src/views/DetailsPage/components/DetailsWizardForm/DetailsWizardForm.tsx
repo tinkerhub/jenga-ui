@@ -99,11 +99,7 @@ const DetailsWizardForm = <
     intialValues,
 }: DetailsWizardFormProps<RegisterFormFieldType, InitialFormFieldType>): JSX.Element => {
     return (
-        <WizardForm
-            onSubmit={submitRegistrationDetails}
-            initialValues={intialValues}
-            resolver={yupResolver(registerFormValidator)}
-        >
+        <WizardForm onSubmit={submitRegistrationDetails} initialValues={intialValues}>
             <WizardStep validation={yupResolver(registerFormValidator.stepOne)}>
                 <FadeIn duration={0.5} delay={0}>
                     <WizardStepOne />

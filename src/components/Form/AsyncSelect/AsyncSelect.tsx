@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import BaseAsyncSelect from 'react-select/async';
-import { Styles } from 'react-select';
+import { OptionTypeBase, Styles } from 'react-select';
 import { getOptionLabel, getOptionValue } from 'react-select/src/builtins';
 import { FormFieldWrapper } from '../FormFieldWrapper';
 
@@ -32,7 +32,7 @@ const AsyncSelect: React.FC<AsyncSelectProps> = ({
     optionLabel,
     optionValue,
 }) => {
-    const styles: Styles = {
+    const styles: Styles<OptionTypeBase, true> = {
         control: (provided) => ({
             ...provided,
             border: 'none',
