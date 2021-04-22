@@ -42,6 +42,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                         popperPlacement="top-start"
                         required={required}
                         wrapperClassName={clsx(fullWidth && 'w-full')}
+                        dateFormat="dd-MM-yyyy"
                         className={clsx(
                             'px-3 py-3 rounded text-sm shadow outline-none focus:outline-none focus:ring focus:ring-primary',
                             error && 'ring ring-red-600',

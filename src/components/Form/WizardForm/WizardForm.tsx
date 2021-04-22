@@ -108,6 +108,7 @@ export const WizardForm = <
                             color="primary"
                             type="submit"
                             loading={hookFormMethods.formState.isSubmitting}
+                            disabled={hookFormMethods.formState.isSubmitting}
                             rounded
                         >
                             <span className="text-white">{isLastStep ? 'Submit' : 'Next'}</span>
