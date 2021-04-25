@@ -1,30 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jenga Frontend
+
+## About
+
+This is the frontend codebase used for [tinkerhub portal](https://join.tinkerhub.org/)
+
+### Built With
+
+1. [NextJS]()
+2. [Tailwindcss]()
+3. [Storybook]()
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. node
+2. npm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+1. `git clone git@github.com:tinkerhub-org/jenga-ui.git && cd jenga-ui`
+2. Add a `.env` file with keys and there required values from `.env.sample`
+3. Install node dependencies
+   `npm install `
+4. Start the dev server
+   `npm run dev`
+5. Open `http://localhost:3000`
 
-## Learn More
+### Optional
 
-To learn more about Next.js, take a look at the following resources:
+1. To start the storybook server
+   `npm run storybook`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Fork the project and create a branch
+   `git checkout -b 'some sensibile name like issue'`
+2. Start it up
+3. And your good to go
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
