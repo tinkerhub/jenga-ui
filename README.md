@@ -6,20 +6,20 @@ This is the frontend codebase used for [tinkerhub portal](https://join.tinkerhub
 
 ### Built With
 
-1. [NextJS]()
-2. [Tailwindcss]()
-3. [Storybook]()
+1. [NextJS](https://nextjs.org/)
+2. [Tailwindcss](https://tailwindcss.com/)
+3. [Storybook](https://storybook.js.org/)
 
 ## Getting Started
 
 ### Prerequisites
 
-1. node
+1. [node](https://nodejs.org/en/)
 2. npm
 
 ### Installation
 
-1. `git clone git@github.com:tinkerhub-org/jenga-ui.git && cd jenga-ui`
+1. `git clone https://github.com/tinkerhub-org/jenga-ui.git`
 2. Add a `.env` file with keys and there required values from `.env.sample`
 3. Install node dependencies
    `npm install `
