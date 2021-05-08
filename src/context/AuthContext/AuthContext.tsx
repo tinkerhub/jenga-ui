@@ -9,7 +9,7 @@ const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || 'jenga_access_token';
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<UserSessionData | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const token = process.browser ? localStorage.getItem(ACCESS_TOKEN) : null;
     const router = useRouter();
 

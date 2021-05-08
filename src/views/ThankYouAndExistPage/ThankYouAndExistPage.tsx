@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, FadeIn, Paper } from 'components';
 import { useThankYouAndExist } from './hooks';
 import { useRouter } from 'next/router';
-import { Newsletter } from './components/Newsletter';
-import { useToggle } from 'hooks/useToggle';
-import { useTimeoutState } from 'hooks/useTimeoutState';
 
 type ThankYouAndExistPageProps = {
     header: JSX.Element;
@@ -13,14 +10,7 @@ type ThankYouAndExistPageProps = {
 
 const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, subBody }) => {
     const { memberID, copiedTextStatus, copyToClipboard, logout } = useThankYouAndExist();
-    const [isNewsletterOpen, toggleNewsLetterOpen] = useToggle(true);
-    const [newsLetterPop, setNewsLetterPop] = useTimeoutState(3000);
     const router = useRouter();
-
-    useEffect(() => {
-        setNewsLetterPop(true);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     if (!memberID) {
         router.push('/');
@@ -47,13 +37,29 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                         <Button fullWidth className="mt-4" rounded onClick={logout}>
                             <span className="text-white">Logout</span>
                         </Button>
+                        <a
+                            target="_blank"
+                            href="https://discord.gg/uYb9SwG9"
+                            rel="noopener noreferrer"
+                        >
+                            <Button fullWidth className="mt-4" rounded variant="outlined">
+                                Join discord
+                            </Button>
+                        </a>
                     </form>
                 </Paper>
+                <div className="px-5 w-full bg-white">
+                    <div className="relative top-8 px-4 font-bold">
+                        <h6>Join Tinkerhub Newsletter</h6>
+                    </div>
+                    <iframe
+                        src="https://tinkerhub.substack.com/embed"
+                        scrolling="no"
+                        className="w-full m-0"
+                        title="TinkerHub Newsletter"
+                    ></iframe>
+                </div>
             </FadeIn>
-            <Newsletter
-                isOpen={!newsLetterPop && isNewsletterOpen}
-                handleClose={() => toggleNewsLetterOpen(false)}
-            />
         </div>
     );
 };

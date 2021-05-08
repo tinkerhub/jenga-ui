@@ -1,7 +1,10 @@
+import { useEffect, useRef } from 'react';
 import Head from 'next/head';
-import { Container } from 'components';
+import confetti from 'canvas-confetti';
 
+import { Container } from 'components';
 import ThankYouAndExistPage from 'views/ThankYouAndExistPage';
+import { randomInRange } from 'utils/randomInRange';
 
 const Title = <h1>Thanks for applying.</h1>;
 
@@ -17,8 +20,28 @@ const subBody = (
         </p>
     </>
 );
-
 const DonePage = (): JSX.Element => {
+    const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        confetti({
+            particleCount: 300,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0, y: 0.8 },
+            scalar: randomInRange(0.4, 1),
+            drift: randomInRange(-0.4, 0.4),
+        });
+        confetti({
+            particleCount: 300,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1, y: 0.8 },
+            scalar: randomInRange(0.4, 1),
+            drift: randomInRange(-0.4, 0.4),
+        });
+    }, []);
+
     return (
         <div className="w-full h-full bg-background overflow-y-auto">
             <Head>
@@ -28,6 +51,7 @@ const DonePage = (): JSX.Element => {
             <Container>
                 <ThankYouAndExistPage header={Title} subBody={subBody} />
             </Container>
+            <canvas id="my-canvas" ref={confettiCanvasRef}></canvas>
         </div>
     );
 };
