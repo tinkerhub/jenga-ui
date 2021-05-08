@@ -44,7 +44,7 @@ const Button = React.forwardRef<Ref, ButtonProps>(
             },
             outlined: {
                 primary: `text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary`,
-                secondary: `text-secondary bg-transparent border border-solid border-secondary hover:bg-secondary hover:text-white active:bg-secondary`,
+                secondary: `text-primary bg-transparent border border-solid border-secondary hover:bg-secondary hover:text-white active:bg-secondary`,
             },
         };
 
