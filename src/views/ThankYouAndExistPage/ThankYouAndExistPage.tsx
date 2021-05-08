@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, FadeIn, Paper } from 'components';
 import { useThankYouAndExist } from './hooks';
 import { useRouter } from 'next/router';
@@ -8,12 +8,18 @@ type ThankYouAndExistPageProps = {
     subBody: JSX.Element;
 };
 
-const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, subBody }) => {
+const ThankYouAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, subBody }) => {
     const { memberID, copiedTextStatus, copyToClipboard, logout } = useThankYouAndExist();
     const router = useRouter();
 
+    useEffect(() => {
+        if (!memberID) {
+            router.push('/');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [memberID]);
+
     if (!memberID) {
-        router.push('/');
         return <div />;
     }
 
@@ -64,4 +70,4 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
     );
 };
 
-export default ThankYOuAndExistPage;
+export default ThankYouAndExistPage;

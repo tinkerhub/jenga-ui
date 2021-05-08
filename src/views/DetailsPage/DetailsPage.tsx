@@ -1,15 +1,23 @@
-import { FadeIn, Paper } from 'components';
-import { useDetailsPage } from './useDetailsPage';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import { FadeIn, Paper } from 'components';
+
+import { useDetailsPage } from './useDetailsPage';
 import { DetailsWizardForm } from './components/DetailsWizardForm';
 
 const DetailsPage = (): JSX.Element => {
     const { verified, submitRegistrationDetails, number } = useDetailsPage();
     const router = useRouter();
 
+    useEffect(() => {
+        if (!verified) {
+            router.push('/');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [verified]);
+
     if (!verified) {
-        router.push('/');
         return <div />;
     }
 
