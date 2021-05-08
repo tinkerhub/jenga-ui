@@ -37,7 +37,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 router.replace('/');
             }
         };
-        // checkUserSession();
+        checkUserSession();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

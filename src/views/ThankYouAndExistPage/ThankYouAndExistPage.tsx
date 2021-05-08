@@ -12,10 +12,10 @@ const ThankYOuAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
     const { memberID, copiedTextStatus, copyToClipboard, logout } = useThankYouAndExist();
     const router = useRouter();
 
-    // if (!memberID) {
-    //     router.push('/');
-    //     return <div />;
-    // }
+    if (!memberID) {
+        router.push('/');
+        return <div />;
+    }
 
     return (
         <div className="w-full h-full flex justify-center">
