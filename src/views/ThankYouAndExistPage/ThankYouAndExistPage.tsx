@@ -45,7 +45,7 @@ const ThankYouAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                         </Button>
                         <a
                             target="_blank"
-                            href="https://discord.gg/uYb9SwG9"
+                            href={process.env.NEXT_PUBLIC_DISCORD_URL}
                             rel="noopener noreferrer"
                         >
                             <Button fullWidth className="mt-4" rounded variant="outlined">
