@@ -35,23 +35,29 @@ const ThankYouAndExistPage: React.FC<ThankYouAndExistPageProps> = ({ header, sub
                         <hr className="mb-4" />
                         <p className="text-subtext text-center mb-4">YOUR MEMBERSHIP ID</p>
                         <h3 className="select-all text-center">{memberID}</h3>
-                        <Button fullWidth className="mt-4 mb-2" rounded onClick={copyToClipboard}>
-                            <span className="text-white">
-                                {copiedTextStatus === 'copied' ? 'Copied' : 'Copy text'}
-                            </span>
-                        </Button>
-                        <Button fullWidth className="mt-4" rounded onClick={logout}>
-                            <span className="text-white">Logout</span>
-                        </Button>
                         <a
                             target="_blank"
                             href={process.env.NEXT_PUBLIC_DISCORD_URL}
                             rel="noopener noreferrer"
                         >
-                            <Button fullWidth className="mt-4" rounded variant="outlined">
-                                Join discord
+                            <Button fullWidth className="mt-4" rounded>
+                                <span className="text-white">Join discord</span>
                             </Button>
                         </a>
+                        <Button
+                            fullWidth
+                            className="mt-4 mb-2"
+                            rounded
+                            onClick={copyToClipboard}
+                            variant="outlined"
+                        >
+                            {copiedTextStatus === 'copied' ? 'Copied' : 'Copy text'}
+                        </Button>
+                        <div className="flex justify-end">
+                            <Button className="mt-4" rounded onClick={logout} variant="text">
+                                Logout
+                            </Button>
+                        </div>
                     </form>
                 </Paper>
                 <div className="px-5 w-full bg-white">

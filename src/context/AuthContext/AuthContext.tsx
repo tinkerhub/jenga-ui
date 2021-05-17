@@ -19,7 +19,7 @@ export const AuthProvider: React.FC = ({ children }) => {
                 if (token) {
                     const userDetails = await getSessionData();
                     setUser(userDetails);
-                    if (userDetails.memberShipID) {
+                    if (userDetails?.memberShipID) {
                         router.push('/exist');
                     } else {
                         if (userDetails.number && userDetails.verified) {

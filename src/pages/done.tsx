@@ -16,7 +16,8 @@ const subBody = (
         </h5>
         <p className="text-subtext mb-5">
             Here is your membership id. We use this id for identity verification. If you need any
-            kind of assistance, please mail us at hello@tinkerhub.org
+            kind of assistance, please mail us at
+            <a href="mailto:hello@tinkerhub.org">hello@tinkerhub.org</a>
         </p>
     </>
 );

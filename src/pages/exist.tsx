@@ -14,7 +14,8 @@ const Title = (
 
 const subBody = (
     <p className="text-subtext mb-5">
-        If you need any kind of assistance, <br /> please mail us at hello@tinkerhub.org
+        If you need any kind of assistance, <br /> please mail us at{' '}
+        <a href="mailto:hello@tinkerhub.org">hello@tinkerhub.org</a>
     </p>
 );
 
