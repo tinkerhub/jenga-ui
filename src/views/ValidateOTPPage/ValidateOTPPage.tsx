@@ -34,11 +34,11 @@ const ValidateOTPPage = (): JSX.Element => {
                             ref={register({
                                 required: true,
                                 maxLength: {
-                                    value: 6,
+                                    value: 4,
                                     message: 'OTP code must have length 6',
                                 },
                                 minLength: {
-                                    value: 6,
+                                    value: 4,
                                     message: 'Minimum length of an OTP is 6',
                                 },
                             })}
