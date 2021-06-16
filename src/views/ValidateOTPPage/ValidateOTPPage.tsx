@@ -20,7 +20,7 @@ const ValidateOTPPage = (): JSX.Element => {
                 <Paper rounded>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            label="Enter your 6 digit OTP"
+                            label="Enter your 4 digit OTP"
                             name="otp"
                             required
                             fullWidth
