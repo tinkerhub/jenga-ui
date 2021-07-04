@@ -57,11 +57,11 @@ const Button = React.forwardRef<Ref, ButtonProps>(
                 type={type}
                 onClick={onClick}
                 className={clsx(
-                    'hover:shadow-md outline-none focus:outline-none text-sm font-medium transition duration-150 ease-in-out',
+                    'outline-none focus:outline-none text-sm font-medium transition duration-150 ease-in-out',
                     buttonType[variant][color],
                     variant !== 'text' && 'py-2 px-4 mr-1 mb-1 hover:shadow-md',
                     fullWidth && 'w-full',
-                    disabled && 'bg-opacity-25 cursor-not-allowed',
+                    disabled && 'opacity-50 cursor-not-allowed',
                     rounded && 'rounded',
                     className
                 )}

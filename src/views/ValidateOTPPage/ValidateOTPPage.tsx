@@ -3,7 +3,15 @@ import { Button, FadeIn, Paper, TextField } from 'components';
 import { useValidateOTP } from './hooks';
 
 const ValidateOTPPage = (): JSX.Element => {
-    const { register, errors, handleSubmit, validateOTPError, isSubmitting } = useValidateOTP();
+    const {
+        register,
+        errors,
+        handleSubmit,
+        validateOTPError,
+        isSubmitting,
+        otpHiddenState,
+        handleRetryOTP,
+    } = useValidateOTP();
 
     return (
         <div className="w-full h-full flex justify-center">
@@ -54,13 +62,35 @@ const ValidateOTPPage = (): JSX.Element => {
                         </Button>
                     </form>
                 </Paper>
-                <div className="px-4 mt-8">
+                <div className="px-4 mt-2">
                     <Link href="/">
                         <div className="text-blue-500 font-medium cursor-pointer py-2">
                             Edit mobile number →
                         </div>
                     </Link>
                 </div>
+                <FadeIn className="flex px-4" delay={15}>
+                    <div>
+                        <Button
+                            variant="text"
+                            disabled={otpHiddenState.text}
+                            color="primary"
+                            onClick={() => handleRetryOTP('text')}
+                        >
+                            Resend OTP
+                        </Button>
+                    </div>
+                    <div className="ml-4">
+                        <Button
+                            variant="text"
+                            disabled={otpHiddenState.voice}
+                            color="primary"
+                            onClick={() => handleRetryOTP('voice')}
+                        >
+                            Resend OTP(call)
+                        </Button>
+                    </div>
+                </FadeIn>
             </FadeIn>
         </div>
     );
