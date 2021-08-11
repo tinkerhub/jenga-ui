@@ -19,6 +19,7 @@ interface submitRegistrationDetails {
     GraduationDate?: Options;
     accept?: boolean;
     My_Skills?: GetSkillsListReturn[];
+    Pookkalam: Options;
     House_Name?: string;
     Street?: string;
     District?: Options;
@@ -54,6 +55,7 @@ export const useDetailsPage = (): useDetailsPageReturn => {
             DOB,
             District,
             Mentor,
+            Pookkalam,
             RegistrationType,
         } = preFormData;
         try {
@@ -77,6 +79,7 @@ export const useDetailsPage = (): useDetailsPageReturn => {
                 Mentor: Boolean(Mentor?.value),
                 RegistrationType: RegistrationType?.value,
                 My_Skills,
+                Pookkalam: Pookkalam.value,
             };
             const { memberShipID, token } = await userRegisterDetailsAPI(formData);
 

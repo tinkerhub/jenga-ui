@@ -70,6 +70,7 @@ const registerFormValidator = {
     }),
     stepThree: Yup.object().shape({
         accept: Yup.boolean().required(),
+        Pookkalam: Yup.object().required(),
         My_Skills: Yup.array()
             .nullable()
             .max(5, 'Pick 5 skills maximum')
