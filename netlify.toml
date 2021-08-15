@@ -5,3 +5,9 @@
   
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/onam"
+  to = "https://mon.school/code-a-pookkalam"
+  status = 200
+  force = true
