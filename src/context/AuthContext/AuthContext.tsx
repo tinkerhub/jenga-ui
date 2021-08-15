@@ -15,6 +15,10 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     useEffect(() => {
         const checkUserSession = async (): Promise<void> => {
+            console.log(router.pathname);
+            if (router.pathname === '/onam') {
+                window.location.href = 'https://mon.school/code-a-pookkalam';
+            }
             try {
                 if (token) {
                     const userDetails = await getSessionData();
