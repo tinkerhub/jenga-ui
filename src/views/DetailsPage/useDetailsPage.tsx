@@ -19,7 +19,6 @@ interface submitRegistrationDetails {
     GraduationDate?: Options;
     accept?: boolean;
     My_Skills?: GetSkillsListReturn[];
-    Pookkalam: Options;
     House_Name?: string;
     Street?: string;
     District?: Options;
@@ -39,7 +38,7 @@ type useDetailsPageReturn = {
 };
 
 export const useDetailsPage = (): useDetailsPageReturn => {
-    const [userRegisterError, setuserRegisterError] = useState(null);
+    const [userRegisterError, setuserRegisterError] = useState<null | string>(null);
 
     const router = useRouter();
 
@@ -55,7 +54,6 @@ export const useDetailsPage = (): useDetailsPageReturn => {
             DOB,
             District,
             Mentor,
-            Pookkalam,
             RegistrationType,
         } = preFormData;
         try {
@@ -79,14 +77,13 @@ export const useDetailsPage = (): useDetailsPageReturn => {
                 Mentor: Boolean(Mentor?.value),
                 RegistrationType: RegistrationType?.value,
                 My_Skills,
-                Pookkalam: Pookkalam.value,
             };
             const { memberShipID, token } = await userRegisterDetailsAPI(formData);
 
             setSessionData({ memberShipID, token });
             router.push('/done');
         } catch (error) {
-            setuserRegisterError(error.message);
+            setuserRegisterError((error as Error).message);
         }
     };
 

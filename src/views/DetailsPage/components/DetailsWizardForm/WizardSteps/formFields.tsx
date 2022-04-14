@@ -127,20 +127,8 @@ export const wizardStepThreeFormFields = {
         name: 'My_Skills',
         helperText: (isMentor: boolean) =>
             isMentor ? 'You can mentor students in' : 'Your good at',
-        optionValue: (option: any): string => option.value,
+        optionValue: (option: any): string => option.id,
         optionLabel: (option: any): string => `${option.name}`,
-    },
-    isPookalam: {
-        type: 'select',
-        label: 'Are a participant of code a pookalam ?',
-        name: 'Pookkalam',
-        options: [
-            { value: true, label: 'Yes' },
-            { value: false, label: 'No' },
-        ],
-        helperText: 'visit https://tinkerhub.org/onam/',
-        optionValue: (option: any): string => option.value,
-        optionLabel: (option: any): string => `${option.label}`,
     },
     address: [
         {

@@ -20,7 +20,7 @@ export const WizardStepThree: React.FC = () => {
         getSkillsListAPI.fetcher
     );
 
-    const { address, skills, isPookalam } = wizardStepThreeFormFields;
+    const { address, skills } = wizardStepThreeFormFields;
 
     return (
         <>
@@ -34,16 +34,6 @@ export const WizardStepThree: React.FC = () => {
                 helperText={errors?.[skills.name]?.message || skills.helperText(isMentor && isPro)}
                 isMulti
                 error={Boolean(errors?.[skills.name]?.message)}
-            />
-            <Select
-                control={control}
-                name={isPookalam.name}
-                label={isPookalam.label}
-                options={isPookalam.options}
-                optionLabel={isPookalam.optionLabel}
-                optionValue={isPookalam.optionValue}
-                helperText={errors?.[isPookalam.name]?.message || isPookalam.helperText}
-                error={Boolean(errors?.[isPookalam.name]?.message)}
             />
             <div className="mb-4 mt-4">
                 <small className="block mt-1 text-xs font-normal text-gray-600">
